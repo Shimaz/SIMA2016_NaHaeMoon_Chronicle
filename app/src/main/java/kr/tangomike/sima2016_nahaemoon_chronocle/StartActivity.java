@@ -1,6 +1,9 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +12,17 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends Activity {
 
     private RelativeLayout rlMain;
+    private ApplicationManager apm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        apm = (ApplicationManager)getApplicationContext();
 
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_start);
@@ -25,6 +31,7 @@ public class StartActivity extends AppCompatActivity {
         tv.setText("Start Splash Screen");
 
         rlMain.addView(tv);
+
 
 
         Button btnTmp = new Button(this);
@@ -36,13 +43,54 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
+                    finish();
+
+                }
+
+            }
+        });
+
+
+
+//        Handler handler = new Handler(){
+//            public void handlerMessage(Message msg){
+//
+//                apm.setAnimating(true);
+//                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
+//                finish();
+//
+//            }
+//
+//
+//        };
+//
+//        handler.sendEmptyMessageDelayed(0, 1500);
+
+
+
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run(){
+
+                apm.setAnimating(true);
                 Intent intent = new Intent(StartActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
                 finish();
 
 
             }
-        });
+        }, 5000);
+
+
 
 
     }

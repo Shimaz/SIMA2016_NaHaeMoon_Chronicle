@@ -14,11 +14,13 @@ import android.widget.RelativeLayout;
 public class MediaTopActivity extends Activity {
 
     private RelativeLayout rlMain;
+    private ApplicationManager apm;
 
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         setContentView(R.layout.activity_media_top);
+        apm = (ApplicationManager)getApplicationContext();
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_media_top);
         Button btnNewspaper = new Button(this);
@@ -30,10 +32,18 @@ public class MediaTopActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MediaTopActivity.this, MediaArticleListActivity.class);
-                startActivity(intent);
-                // TODO: some transition effect here
-                finish();
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+
+                    Intent intent = new Intent(MediaTopActivity.this, MediaArticleListActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_out, R.anim.right_in);
+                    finish();
+
+                }
+
+
             }
         });
 
@@ -49,10 +59,16 @@ public class MediaTopActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MediaTopActivity.this, MediaAudioBookActivity.class);
-                startActivity(intent);
-                // TODO: some transition effect here
-                finish();
+                if(!apm.isAnimating()){
+                    apm.setAnimating(true);
+
+                    Intent intent = new Intent(MediaTopActivity.this, MediaAudioBookActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_out, R.anim.right_in);
+                    finish();
+                }
+
+
 
             }
         });
@@ -69,10 +85,21 @@ public class MediaTopActivity extends Activity {
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaTopActivity.this, MediaVideoActivity.class);
-                startActivity(intent);
-                // TODO: some transition effect here
-                finish();
+
+
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+
+                    Intent intent = new Intent(MediaTopActivity.this, MediaVideoActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_out, R.anim.right_out);
+                    finish();
+
+
+                }
+
+
 
             }
         });
@@ -81,5 +108,42 @@ public class MediaTopActivity extends Activity {
 
 
 
+        Button btnHome = new Button(this);
+        btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        btnHome.setX(680);
+        btnHome.setY(10);
+        btnHome.setText("Back");
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!apm.isAnimating()){
+                    apm.setAnimating(true);
+
+                    Intent intent = new Intent(MediaTopActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+
+                    finish();
+
+                }
+
+
+            }
+        });
+
+        rlMain.addView(btnHome);
+
+
     }
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        apm.setAnimating(false);
+
+    }
+
 }

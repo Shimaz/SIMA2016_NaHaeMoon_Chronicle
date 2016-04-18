@@ -13,11 +13,13 @@ import android.widget.RelativeLayout;
 public class MainActivity extends Activity{
 
     private RelativeLayout rlMain;
+    private ApplicationManager apm;
 
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         setContentView(R.layout.activity_main);
+        apm = (ApplicationManager)getApplicationContext();
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_main);
 
@@ -30,10 +32,17 @@ public class MainActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                startActivity(intent);
-                // TODO: some transition effect here
-                finish();
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
+                    finish();
+
+                }
+
+
 
             }
         });
@@ -50,12 +59,23 @@ public class MainActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, MediaTopActivity.class);
-                startActivity(intent);
-                // TODO: some transition effect here
-                finish();
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+                    Intent intent = new Intent(MainActivity.this, MediaTopActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+
+                }
+
+
             }
         });
+
+
+        rlMain.addView(btnMedia);
+
 
 
 
@@ -65,6 +85,15 @@ public class MainActivity extends Activity{
     }
 
 
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        // all interactions are enabled from here
+
+        apm.setAnimating(false);
+    }
 
 
 }

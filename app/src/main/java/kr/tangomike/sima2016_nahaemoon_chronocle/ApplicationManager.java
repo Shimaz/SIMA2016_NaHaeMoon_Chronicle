@@ -8,9 +8,11 @@ import android.app.Application;
 public class ApplicationManager extends Application {
 
     private BGMManager bgmManager;
+    private boolean isAnimating;
 
 
     private void initData(){
+        isAnimating = false;
         bgmManager = new BGMManager();
 
 
@@ -21,13 +23,21 @@ public class ApplicationManager extends Application {
 
 
 
+    public void setAnimating(boolean val){
+        isAnimating = val;
+    }
+
+
+    public boolean isAnimating(){
+        return isAnimating;
+    }
+
+
     public void onCreate(){
         super.onCreate();
 
         initData();
 
     }
-
-
 
 }

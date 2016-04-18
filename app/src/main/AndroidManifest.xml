@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kr.tangomike.sima2016_nahaemoon_chronocle">
 
+    <uses-sdk android:minSdkVersion="19" android:maxSdkVersion="23"></uses-sdk>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +26,19 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:screenOrientation="reversePortrait">
 
+
+        </activity>
+
+
+        <activity android:name=".TimelineActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait">
+
+        </activity>
+
+        <activity android:name=".MediaTopActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait">
 
         </activity>
 
