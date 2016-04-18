@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 /**
- * Created by shima on 2016-04-16.
+ * Created by shimaz on 2016-04-16.
  */
 public class MediaTopActivity extends Activity {
 
@@ -38,7 +38,7 @@ public class MediaTopActivity extends Activity {
 
                     Intent intent = new Intent(MediaTopActivity.this, MediaArticleListActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.left_out, R.anim.right_in);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     finish();
 
                 }
@@ -64,7 +64,7 @@ public class MediaTopActivity extends Activity {
 
                     Intent intent = new Intent(MediaTopActivity.this, MediaAudioBookActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.left_out, R.anim.right_in);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     finish();
                 }
 
@@ -93,7 +93,7 @@ public class MediaTopActivity extends Activity {
 
                     Intent intent = new Intent(MediaTopActivity.this, MediaVideoActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.left_out, R.anim.right_out);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     finish();
 
 

@@ -1,7 +1,8 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 /**
- * Created by shima on 2016-04-15.
+ * Created by shimaz on 2016-04-15.
+ * shimaz.bsh@gmail.com
  */
 public class BGMManager {
 

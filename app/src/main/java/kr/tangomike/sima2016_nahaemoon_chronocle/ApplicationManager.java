@@ -3,7 +3,7 @@ package kr.tangomike.sima2016_nahaemoon_chronocle;
 import android.app.Application;
 
 /**
- * Created by shima on 2016-04-15.
+ * Created by shimaz on 2016-04-15.
  */
 public class ApplicationManager extends Application {
 
@@ -17,10 +17,6 @@ public class ApplicationManager extends Application {
 
 
     }
-
-
-
-
 
 
     public void setAnimating(boolean val){

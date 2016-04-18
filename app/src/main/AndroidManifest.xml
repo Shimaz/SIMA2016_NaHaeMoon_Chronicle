@@ -42,6 +42,22 @@
 
         </activity>
 
+        <activity android:name=".MediaArticleListActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait">
+
+
+        </activity>
+
+        <activity android:name=".ArticleViewActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait">
+
+
+        </activity>
+
+
+
 
     </application>
 

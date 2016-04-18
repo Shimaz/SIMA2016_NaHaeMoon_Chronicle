@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SIMA2016_NaHaeMoon_Chronicle.iml" filepath="$PROJECT_DIR$/SIMA2016_NaHaeMoon_Chronicle.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sima2016_NaHaeMoon_Chronocle.iml" filepath="$PROJECT_DIR$/Sima2016_NaHaeMoon_Chronocle.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

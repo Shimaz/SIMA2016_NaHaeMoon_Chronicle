@@ -8,7 +8,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 /**
- * Created by shima on 2016-04-15.
+ * Created by shimaz on 2016-04-15.
  */
 public class MainActivity extends Activity{
 
