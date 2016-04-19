@@ -36,6 +36,8 @@
 
         </activity>
 
+
+
         <activity android:name=".MediaTopActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:screenOrientation="reversePortrait">
@@ -53,6 +55,12 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:screenOrientation="reversePortrait">
 
+
+        </activity>
+
+        <activity android:name=".MediaVideoActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait">
 
         </activity>
 
