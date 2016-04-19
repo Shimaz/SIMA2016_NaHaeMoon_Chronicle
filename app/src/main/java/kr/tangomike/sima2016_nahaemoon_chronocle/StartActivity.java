@@ -2,6 +2,7 @@ package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,19 @@ public class StartActivity extends Activity {
         tv.setText("Start Splash Screen");
 
         rlMain.addView(tv);
+
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/jabml.ttf");
+
+        TextView fontTest = new TextView(this);
+        fontTest.setText("중앙 신문명조 폰트 적용.\n저작권 정보 표시");
+        fontTest.setTextSize(25);
+        fontTest.setTypeface(tf);
+        fontTest.setX(20);
+        fontTest.setY(100);
+        fontTest.setLineSpacing(0, 1.25f);
+        rlMain.addView(fontTest);
+
 
 
 
