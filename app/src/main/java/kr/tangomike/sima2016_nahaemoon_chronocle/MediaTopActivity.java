@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -19,15 +20,18 @@ public class MediaTopActivity extends Activity {
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
+        super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_media_top);
         apm = (ApplicationManager)getApplicationContext();
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_media_top);
+        rlMain.setBackgroundResource(R.drawable.mediatop_img_bg);
+
         Button btnNewspaper = new Button(this);
         btnNewspaper.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnNewspaper.setX(100);
-        btnNewspaper.setY(10);
-        btnNewspaper.setText("View Newspaper");
+        btnNewspaper.setBackgroundResource(R.drawable.mediatop_btn_article);
+        btnNewspaper.setX(204);
+        btnNewspaper.setY(252);
         btnNewspaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,9 +56,9 @@ public class MediaTopActivity extends Activity {
 
         Button btnAudiobook = new Button(this);
         btnAudiobook.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnAudiobook.setX(100);
-        btnAudiobook.setY(110);
-        btnAudiobook.setText("Audiobook List");
+        btnAudiobook.setBackgroundResource(R.drawable.mediatop_btn_article);
+        btnAudiobook.setX(234);
+        btnAudiobook.setY(469);
         btnAudiobook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,9 +83,9 @@ public class MediaTopActivity extends Activity {
 
         Button btnVideo = new Button(this);
         btnVideo.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnVideo.setX(100);
-        btnVideo.setY(220);
-        btnVideo.setText("Movie Player");
+        btnVideo.setBackgroundResource(R.drawable.mediatop_btn_video);
+        btnVideo.setX(192);
+        btnVideo.setY(706);
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +114,9 @@ public class MediaTopActivity extends Activity {
 
         Button btnHome = new Button(this);
         btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnHome.setX(680);
-        btnHome.setY(10);
-        btnHome.setText("Back");
+        btnHome.setBackgroundResource(R.drawable.media_common_btn_back);
+        btnHome.setX(56);
+        btnHome.setY(948);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

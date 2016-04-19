@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +23,8 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         apm = (ApplicationManager)getApplicationContext();
 
 
@@ -34,27 +37,27 @@ public class StartActivity extends Activity {
 
 
 
-        Button btnTmp = new Button(this);
-        btnTmp.setText("Start");
-        btnTmp.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnTmp.setX(100);
-        btnTmp.setY(100);
-        btnTmp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(!apm.isAnimating()){
-
-                    apm.setAnimating(true);
-                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
-                    finish();
-
-                }
-
-            }
-        });
+//        Button btnTmp = new Button(this);
+//        btnTmp.setText("Start");
+//        btnTmp.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+//        btnTmp.setX(100);
+//        btnTmp.setY(100);
+//        btnTmp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(!apm.isAnimating()){
+//
+//                    apm.setAnimating(true);
+//                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
+//                    finish();
+//
+//                }
+//
+//            }
+//        });
 
 
 

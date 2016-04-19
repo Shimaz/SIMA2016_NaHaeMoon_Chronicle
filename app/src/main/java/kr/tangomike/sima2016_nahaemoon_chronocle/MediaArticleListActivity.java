@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -21,10 +22,12 @@ public class MediaArticleListActivity extends Activity {
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
+        super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         apm = (ApplicationManager)getApplicationContext();
 
         setContentView(R.layout.activity_article_list);
         rlMain = (RelativeLayout)findViewById(R.id.rl_article_list);
+        rlMain.setBackgroundResource(R.drawable.media_articlelist_img_bg);
 
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
@@ -36,7 +39,7 @@ public class MediaArticleListActivity extends Activity {
                 Intent intent = new Intent(MediaArticleListActivity.this, ArticleViewActivity.class);
                 intent.putExtra("article number", tag);
                 startActivity(intent);
-                overridePendingTransition(R.anim.left_out, R.anim.right_in);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
 
 
@@ -45,9 +48,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn01 = new Button(this);
         btn01.setLayoutParams(lp);
-        btn01.setText("Article 01");
-        btn01.setX(100);
-        btn01.setY(20);
+        btn01.setBackgroundResource(R.drawable.media_articlelist_btn_01);
+        btn01.setX(155);
+        btn01.setY(282);
         btn01.setOnClickListener(ocl);
         // TODO: set tag as article number
         btn01.setTag(1);
@@ -57,9 +60,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn02 = new Button(this);
         btn02.setLayoutParams(lp);
-        btn02.setText("Article 02");
-        btn02.setX(100);
-        btn02.setY(140);
+        btn02.setBackgroundResource(R.drawable.media_articlelist_btn_02);
+        btn02.setX(155);
+        btn02.setY(366);
         btn02.setOnClickListener(ocl);
         // TODO: set tag as article number
         btn02.setTag(2);
@@ -69,9 +72,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn03 = new Button(this);
         btn03.setLayoutParams(lp);
-        btn03.setText("Artcle 03");
-        btn03.setX(100);
-        btn03.setY(260);
+        btn03.setBackgroundResource(R.drawable.media_articlelist_btn_03);
+        btn03.setX(155);
+        btn03.setY(419);
         btn03.setOnClickListener(ocl);
         // TODO: set tag as article number
         btn03.setTag(3);
@@ -80,9 +83,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn04 = new Button(this);
         btn04.setLayoutParams(lp);
-        btn04.setText("Article 04");
-        btn04.setX(100);
-        btn04.setY(380);
+        btn04.setBackgroundResource(R.drawable.media_articlelist_btn_04);
+        btn04.setX(155);
+        btn04.setY(478);
         btn04.setOnClickListener(ocl);
         // TODO: set tag as article number
         btn04.setTag(4);
@@ -92,9 +95,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn05 = new Button(this);
         btn05.setLayoutParams(lp);
-        btn05.setText("Article 05");
-        btn05.setX(100);
-        btn05.setY(500);
+        btn05.setBackgroundResource(R.drawable.media_articlelist_btn_05);
+        btn05.setX(155);
+        btn05.setY(529);
         btn05.setOnClickListener(ocl);
         // TODO: set tag as article number
         btn04.setTag(5);
@@ -104,9 +107,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn06 = new Button(this);
         btn06.setLayoutParams(lp);
-        btn06.setText("Article 06");
-        btn06.setX(100);
-        btn06.setY(620);
+        btn06.setBackgroundResource(R.drawable.media_articlelist_btn_06);
+        btn06.setX(155);
+        btn06.setY(731);
         btn06.setOnClickListener(ocl);
         // TODO: set tag as article number
         btn06.setTag(6);
@@ -116,9 +119,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn07 = new Button(this);
         btn07.setLayoutParams(lp);
-        btn07.setText("Article 07");
-        btn07.setX(100);
-        btn07.setY(740);
+        btn07.setBackgroundResource(R.drawable.media_articlelist_btn_07);
+        btn07.setX(155);
+        btn07.setY(804);
         btn07.setOnClickListener(ocl);
         // TODO: set tag as article number;
         btn07.setTag(7);
@@ -128,9 +131,9 @@ public class MediaArticleListActivity extends Activity {
 
         Button btn08 = new Button(this);
         btn08.setLayoutParams(lp);
-        btn08.setText("Article 08");
-        btn08.setX(100);
-        btn08.setY(860);
+        btn08.setBackgroundResource(R.drawable.media_articlelist_btn_08);
+        btn08.setX(155);
+        btn08.setY(864);
         btn08.setOnClickListener(ocl);
         // TODO: set tag as article number;
         btn08.setTag(8);
@@ -155,9 +158,9 @@ public class MediaArticleListActivity extends Activity {
 
 
         btnHome.setLayoutParams(lp);
-        btnHome.setText("Back");
-        btnHome.setX(100);
-        btnHome.setY(980);
+        btnHome.setBackgroundResource(R.drawable.media_common_btn_back);
+        btnHome.setX(56);
+        btnHome.setY(948);
 
         rlMain.addView(btnHome);
 
