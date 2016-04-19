@@ -34,13 +34,20 @@ public class MediaArticleListActivity extends Activity {
         OnClickListener ocl = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                int tag = (int)v.getTag();
 
-                Intent intent = new Intent(MediaArticleListActivity.this, ArticleViewActivity.class);
-                intent.putExtra("article number", tag);
-                startActivity(intent);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                finish();
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+
+                    int tag = (int)v.getTag();
+
+                    Intent intent = new Intent(MediaArticleListActivity.this, ArticleViewActivity.class);
+                    intent.putExtra("article number", tag);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                }
+
 
 
             }
@@ -149,10 +156,16 @@ public class MediaArticleListActivity extends Activity {
         btnHome.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaArticleListActivity.this, MediaTopActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.left_in, R.anim.right_out);
-                finish();
+                if(!apm.isAnimating()){
+
+                    apm.setAnimating(true);
+
+                    Intent intent = new Intent(MediaArticleListActivity.this, MediaTopActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
+                }
+
             }
         });
 
