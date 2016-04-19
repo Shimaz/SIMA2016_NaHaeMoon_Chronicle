@@ -5,6 +5,10 @@ import android.app.Application;
 /**
  * Created by shimaz on 2016-04-15.
  */
+
+
+// TODO: Global Timer - reset all activities on time
+// TODO:
 public class ApplicationManager extends Application {
 
     private BGMManager bgmManager;
