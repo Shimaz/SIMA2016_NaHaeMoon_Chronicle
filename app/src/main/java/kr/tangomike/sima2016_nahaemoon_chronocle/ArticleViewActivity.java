@@ -1,11 +1,18 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,6 +23,7 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -88,6 +96,8 @@ public class ArticleViewActivity extends Activity {
         }
 
         isTranslationOpen = false;
+        rlTranslated.setTranslationY(1024);
+
 
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
@@ -100,7 +110,7 @@ public class ArticleViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if(!apm.isAnimating()){
+                if(!apm.isAnimating() && !isTranslationOpen){
                     apm.setAnimating(true);
                     Intent intent = new Intent(ArticleViewActivity.this, MediaArticleListActivity.class);
                     startActivity(intent);
@@ -156,7 +166,7 @@ public class ArticleViewActivity extends Activity {
         btnNext = new Button(this);
         btnNext.setLayoutParams(lp);
         btnNext.setBackgroundResource(R.drawable.article_btn_next);
-        btnNext.setX(233);
+        btnNext.setX(436);
         btnNext.setY(0);
         btnNext.setOnClickListener(ocl);
         btnNext.setTag(btnKind.BTN_NEXT);
@@ -170,7 +180,7 @@ public class ArticleViewActivity extends Activity {
         btnPrev = new Button(this);
         btnPrev.setLayoutParams(lp);
         btnPrev.setBackgroundResource(R.drawable.article_btn_prev);
-        btnPrev.setX(436);
+        btnPrev.setX(233);
         btnPrev.setY(0);
         btnPrev.setOnClickListener(ocl);
         btnPrev.setTag(btnKind.BTN_PREV);
@@ -199,11 +209,14 @@ public class ArticleViewActivity extends Activity {
 
 
                     if(isTranslationOpen){
-                        // TODO: close translation
+
+                        closeTranslation();
 
 
                     }else{
-                        // TODO: open translation
+
+
+                        openTranslation();
 
                     }
 
@@ -227,6 +240,7 @@ public class ArticleViewActivity extends Activity {
         tvTranslatedText.setTypeface(tf);
         tvTranslatedText.setTextSize(18.0f);
         tvTranslatedText.setLineSpacing(0, 1.25f);
+        tvTranslatedText.setTextColor(Color.BLACK);
 
 
 
@@ -235,16 +249,32 @@ public class ArticleViewActivity extends Activity {
             tvPageCount.setText("1/1");
             ivNewspaper.setImageResource(apm.getArticleInterview(articleNumber - 1));
             ivArticleTitle.setImageResource(apm.getArticleInterviewTitle(articleNumber - 1, false));
+            ivArticleTransTitle.setImageResource(apm.getArticleInterviewTitle(articleNumber - 1, true));
 
             // TODO: Load article text
 
             try{
+                InputStream is = getResources().openRawResource(apm.getInterviewTranslatedText(articleNumber - 1));
+                InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+                BufferedReader br = new BufferedReader(isr);
+
+                String interviewText;
+                StringBuilder sb = new StringBuilder("");
+                while((interviewText = br.readLine()) != null){
+                    sb.append(interviewText);
+                }
+
+                is.close();
+
+                tvTranslatedText.setText(sb.toString());
 
 
             }catch (Exception e){
                 e.printStackTrace();
             }
 
+
+            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
 
 
         }else{
@@ -254,6 +284,31 @@ public class ArticleViewActivity extends Activity {
             tvPageCount.setText(tmp);
             ivNewspaper.setImageResource(apm.getArticleEssay(essayNumber - 1, articleNumber - 1));
             ivArticleTitle.setImageResource(apm.getArticleEssayTitle(essayNumber - 1, articleNumber - 1 , false));
+            ivArticleTransTitle.setImageResource(apm.getArticleEssayTitle(essayNumber - 1, articleNumber - 1, true));
+
+
+            try{
+                InputStream is = getResources().openRawResource(apm.getEssayText(essayNumber - 1, articleNumber - 1));
+                InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+                BufferedReader br = new BufferedReader(isr);
+
+                String interviewText;
+                StringBuilder sb = new StringBuilder("");
+                while((interviewText = br.readLine()) != null){
+                    sb.append(interviewText);
+                }
+
+                is.close();
+
+                tvTranslatedText.setText(sb.toString());
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
 
         }
 
@@ -263,32 +318,116 @@ public class ArticleViewActivity extends Activity {
         pva.update();
 
 
+        scrlArticleTranslated.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
         // TODO: Add scrollview contents
 
 
 
     }
 
-    private void openMenu(){
+    private void openTranslation(){
 
-        // TODO: open top and bottom menu when touch on zoomable area
-        if(!isMenuOpen){
+        ObjectAnimator openAni = ObjectAnimator.ofFloat(rlTranslated, "translationY", 1024, 88);
+        openAni.setDuration(700);
+        openAni.setInterpolator(new AccelerateDecelerateInterpolator());
+        openAni.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
 
-        }
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+                apm.setAnimating(false);
+                isTranslationOpen = true;
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        openAni.start();
+
+
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out_short);
+        btnOpenClose.setBackgroundResource(R.drawable.article_btn_close);
+        ivArticleTitle.startAnimation(fadeOut);
+        btnBack.startAnimation(fadeOut);
+
+
 
     }
 
 
-    private void closeMenu(){
+    private void closeTranslation(){
 
         // TODO: close top and bottom menu on timer setting
-        if(isMenuOpen){
 
-        }
+
+
+        ObjectAnimator closeAni = ObjectAnimator.ofFloat(rlTranslated, "translationY", 88, 1024);
+        closeAni.setDuration(700);
+        closeAni.setInterpolator(new AccelerateDecelerateInterpolator());
+        closeAni.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+                apm.setAnimating(false);
+                isTranslationOpen = false;
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+
+        closeAni.start();
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_short);
+        btnOpenClose.setBackgroundResource(R.drawable.article_btn_open);
+        ivArticleTitle.startAnimation(fadeIn);
+        btnBack.startAnimation(fadeIn);
+
+
 
     }
 
 
+
+    private void openMenu(){
+        // TODO: open top and bottom menu
+
+
+    }
+
+    private void closeMenu(){
+        // TODO: close top and bottom menu
+
+
+    }
 
 
     @Override

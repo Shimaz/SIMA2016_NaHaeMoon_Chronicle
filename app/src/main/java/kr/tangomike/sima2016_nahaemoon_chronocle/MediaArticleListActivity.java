@@ -107,7 +107,7 @@ public class MediaArticleListActivity extends Activity {
         btn05.setY(529);
         btn05.setOnClickListener(ocl);
         // TODO: set tag as article number
-        btn04.setTag(5);
+        btn05.setTag(5);
 
         rlMain.addView(btn05);
 

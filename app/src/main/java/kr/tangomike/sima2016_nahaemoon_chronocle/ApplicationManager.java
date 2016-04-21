@@ -70,7 +70,7 @@ public class ApplicationManager extends Application {
             articleInterviewTitle.add(ir2);
 
 
-            String str3 = "article_interview_trans_img_title" + num;
+            String str3 = "article_interview_trans_img_title_" + num;
             int ir3 = getResources().getIdentifier(str3, "drawable", PACKAGE_NAME);
             articleInterviewTransTitle.add(ir3);
 
