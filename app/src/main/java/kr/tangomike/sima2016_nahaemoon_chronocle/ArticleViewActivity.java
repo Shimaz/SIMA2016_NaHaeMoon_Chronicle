@@ -14,6 +14,10 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
@@ -28,6 +32,7 @@ public class ArticleViewActivity extends Activity {
     private RelativeLayout rlMain;
     private RelativeLayout rlTopTitle;
     private RelativeLayout rlBottomMenu;
+    private RelativeLayout rlTranslated;
     private ScrollView scrlArticleTranslated;
     private Button btnNext;
     private Button btnPrev;
@@ -35,8 +40,10 @@ public class ArticleViewActivity extends Activity {
     private Button btnBack;
     private ImageView ivNewspaper;
     private ImageView ivArticleTitle;
+    private ImageView ivArticleTransTitle;
 
     private TextView tvPageCount;
+    private TextView tvTranslatedText;
 
     private boolean isTranslationOpen;
     private boolean isMenuOpen;
@@ -65,6 +72,10 @@ public class ArticleViewActivity extends Activity {
         tvPageCount = (TextView)findViewById(R.id.tv_article_page_number);
         ivNewspaper = (ImageView)findViewById(R.id.iv_article_zoom);
         ivArticleTitle = (ImageView)findViewById(R.id.iv_article_view_title);
+        ivArticleTransTitle = (ImageView)findViewById(R.id.iv_article_view_trans_title);
+        tvTranslatedText = (TextView)findViewById(R.id.tv_article_translated);
+        rlTranslated = (RelativeLayout)findViewById(R.id.rl_article_translated);
+
 
         Intent intent = this.getIntent();
         articleNumber = intent.getIntExtra("article number", 0);
@@ -109,26 +120,33 @@ public class ArticleViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                if(!apm.isAnimating()){
 
-                Intent intent = new Intent(ArticleViewActivity.this, ArticleViewActivity.class);
-                if(v.getTag() == btnKind.BTN_NEXT){
+                    apm.setAnimating(true);
 
-                    articleNumber++;
+                    Intent intent = new Intent(ArticleViewActivity.this, ArticleViewActivity.class);
+                    if(v.getTag() == btnKind.BTN_NEXT){
 
-                    intent.putExtra("article number", articleNumber + (essayNumber * 10));
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        articleNumber++;
 
-                }else{
+                        intent.putExtra("article number", articleNumber + (essayNumber * 10));
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
-                    articleNumber--;
-                    intent.putExtra("article number", articleNumber + (essayNumber * 10));
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    }else{
+
+                        articleNumber--;
+                        intent.putExtra("article number", articleNumber + (essayNumber * 10));
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+
+                    }
+
+                    finish();
 
                 }
 
-                finish();
+
 
 
             }
@@ -137,9 +155,9 @@ public class ArticleViewActivity extends Activity {
 
         btnNext = new Button(this);
         btnNext.setLayoutParams(lp);
-        btnNext.setText("Next");
-        btnNext.setX(600);
-        btnNext.setY(50);
+        btnNext.setBackgroundResource(R.drawable.article_btn_next);
+        btnNext.setX(233);
+        btnNext.setY(0);
         btnNext.setOnClickListener(ocl);
         btnNext.setTag(btnKind.BTN_NEXT);
 
@@ -151,9 +169,9 @@ public class ArticleViewActivity extends Activity {
 
         btnPrev = new Button(this);
         btnPrev.setLayoutParams(lp);
-        btnPrev.setText("Prev");
-        btnPrev.setX(200);
-        btnPrev.setY(50);
+        btnPrev.setBackgroundResource(R.drawable.article_btn_prev);
+        btnPrev.setX(436);
+        btnPrev.setY(0);
         btnPrev.setOnClickListener(ocl);
         btnPrev.setTag(btnKind.BTN_PREV);
 
@@ -167,20 +185,30 @@ public class ArticleViewActivity extends Activity {
 
         btnOpenClose = new Button(this);
         btnOpenClose.setLayoutParams(lp);
-        btnOpenClose.setX(0);
+        btnOpenClose.setBackgroundResource(R.drawable.article_btn_open);
+        btnOpenClose.setX(582);
         btnOpenClose.setY(0);
         btnOpenClose.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(isTranslationOpen){
-                    // TODO: close translation
+                if(!apm.isAnimating()){
 
 
-                }else{
-                    // TODO: open translation
+                    apm.setAnimating(true);
+
+
+                    if(isTranslationOpen){
+                        // TODO: close translation
+
+
+                    }else{
+                        // TODO: open translation
+
+                    }
 
                 }
+
 
 
 
@@ -195,9 +223,27 @@ public class ArticleViewActivity extends Activity {
         tvPageCount.setTextSize(18.0f);
         tvPageCount.setTypeface(tf);
 
+        rlTranslated.setBackgroundResource(R.drawable.article_img_bg);
+        tvTranslatedText.setTypeface(tf);
+        tvTranslatedText.setTextSize(18.0f);
+        tvTranslatedText.setLineSpacing(0, 1.25f);
+
+
+
+
         if(essayNumber == 0){
             tvPageCount.setText("1/1");
             ivNewspaper.setImageResource(apm.getArticleInterview(articleNumber - 1));
+            ivArticleTitle.setImageResource(apm.getArticleInterviewTitle(articleNumber - 1, false));
+
+            // TODO: Load article text
+
+            try{
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
 
 
@@ -206,8 +252,8 @@ public class ArticleViewActivity extends Activity {
             tmp = String.format("%d/%d", articleNumber, apm.getArticleEssayCount(essayNumber - 1));
 
             tvPageCount.setText(tmp);
-
             ivNewspaper.setImageResource(apm.getArticleEssay(essayNumber - 1, articleNumber - 1));
+            ivArticleTitle.setImageResource(apm.getArticleEssayTitle(essayNumber - 1, articleNumber - 1 , false));
 
         }
 

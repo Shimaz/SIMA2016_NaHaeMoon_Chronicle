@@ -32,36 +32,64 @@ public class ApplicationManager extends Application {
     private ArrayList<ArrayList> articleEssayTransTitle;
 
 
+    private ArrayList<Integer> articleInterviewTranslated;
+    private ArrayList<ArrayList> articleEssayTranslated;
+
+    private String PACKAGE_NAME;
+
     private void initData(){
         isAnimating = false;
         isTicking = false;
         tickTime = 0;
         bgmManager = new BGMManager();
 
-        String PACKAGE_NAME = getPackageName();
+        PACKAGE_NAME = getPackageName();
 
+    }
+
+
+    private void initArticleData(){
 
         articleInterviewImg = new ArrayList();
         articleInterviewTitle = new ArrayList();
+        articleInterviewTransTitle = new ArrayList();
 
-        for(int i = 0; i < 6; i++){
+        articleInterviewTranslated = new ArrayList();
+
+
+        for(int i = 0; i < 5; i++){
 
             String num = String.format("%d", i + 1);
             String str = "article_interview_img_news_" + num;
             int ir = getResources().getIdentifier(str, "drawable", PACKAGE_NAME);
             articleInterviewImg.add(ir);
 
-            //TODO
-            String str2 = "article";
+
+            String str2 = "article_interview_img_title_" + num;
+            int ir2 = getResources().getIdentifier(str2, "drawable", PACKAGE_NAME);
+            articleInterviewTitle.add(ir2);
 
 
+            String str3 = "article_interview_trans_img_title" + num;
+            int ir3 = getResources().getIdentifier(str3, "drawable", PACKAGE_NAME);
+            articleInterviewTransTitle.add(ir3);
+
+            String str4 = "article_interview_trans_text_" + num;
+            int ir4 = getResources().getIdentifier(str4, "raw", PACKAGE_NAME);
+            articleInterviewTranslated.add(ir4);
 
         }
 
 
         articleEssayImg = new ArrayList();
+        articleEssayTitle = new ArrayList();
+        articleEssayTransTitle = new ArrayList();
+        articleEssayTranslated = new ArrayList();
 
         ArrayList<Integer> arrTmp01 = new ArrayList();
+        ArrayList<Integer> arrTmp011 = new ArrayList();
+        ArrayList<Integer> arrTmp0111 = new ArrayList();
+        ArrayList<Integer> arrTmp01111 = new ArrayList();
         for(int i = 0; i < 4; i++){
 
             String num = String.format("%d", i + 1);
@@ -69,35 +97,85 @@ public class ApplicationManager extends Application {
             int ir = getResources().getIdentifier(str, "drawable", PACKAGE_NAME);
             arrTmp01.add(ir);
 
+            String str2 = "article_essay_1_img_title_" + num;
+            int ir2 = getResources().getIdentifier(str2, "drawable", PACKAGE_NAME);
+            arrTmp011.add(ir2);
+
+            String str3 = "article_essay_1_trans_img_title_" + num;
+            int ir3 = getResources().getIdentifier(str3, "drawable", PACKAGE_NAME);
+            arrTmp0111.add(ir3);
+
+            String str4 = "article_essay_1_trans_text_" + num;
+            int ir4 = getResources().getIdentifier(str4, "raw", PACKAGE_NAME);
+            arrTmp01111.add(ir4);
+
         }
 
         articleEssayImg.add(arrTmp01);
+        articleEssayTitle.add(arrTmp011);
+        articleEssayTransTitle.add(arrTmp0111);
+        articleEssayTranslated.add(arrTmp01111);
+
 
 
         ArrayList<Integer> arrTmp02 = new ArrayList();
+        ArrayList<Integer> arrTmp022 = new ArrayList();
+        ArrayList<Integer> arrTmp0222 = new ArrayList();
+        ArrayList<Integer> arrTmp02222 = new ArrayList();
         for(int i = 0; i < 7; i++){
             String num = String.format("%d", i + 1);
             String str = "article_essay_2_img_news_" + num;
             int ir = getResources().getIdentifier(str, "drawable", PACKAGE_NAME);
             arrTmp02.add(ir);
 
+            String str2 = "article_essay_2_img_title_" + num;
+            int ir2 = getResources().getIdentifier(str2, "drawable", PACKAGE_NAME);
+            arrTmp022.add(ir2);
+
+            String str3 = "article_essay_2_trans_img_title_" + num;
+            int ir3 = getResources().getIdentifier(str3, "drawable", PACKAGE_NAME);
+            arrTmp0222.add(ir3);
+
+            String str4 = "article_essay_2_trans_text_" + num;
+            int ir4 = getResources().getIdentifier(str4, "raw", PACKAGE_NAME);
+            arrTmp02222.add(ir4);
+
         }
 
         articleEssayImg.add(arrTmp02);
+        articleEssayTitle.add(arrTmp022);
+        articleEssayTransTitle.add(arrTmp0222);
+        articleEssayTranslated.add(arrTmp02222);
+
 
         ArrayList<Integer> arrTmp03 = new ArrayList();
+        ArrayList<Integer> arrTmp033 = new ArrayList();
+        ArrayList<Integer> arrTmp0333= new ArrayList();
+        ArrayList<Integer> arrTmp03333 = new ArrayList();
         for(int i = 0; i < 11; i++){
             String num = String.format("%d", i + 1);
             String str = "article_essay_3_img_news_" + num;
             int ir = getResources().getIdentifier(str, "drawable", PACKAGE_NAME);
             arrTmp03.add(ir);
 
+            String str2 = "article_essay_3_img_title_" + num;
+            int ir2 = getResources().getIdentifier(str2, "drawable", PACKAGE_NAME);
+            arrTmp033.add(ir2);
+
+            String str3 = "article_essay_3_trans_img_title_" + num;
+            int ir3 = getResources().getIdentifier(str3, "drawable", PACKAGE_NAME);
+            arrTmp0333.add(ir3);
+
+            String str4 = "article_essay_3_trans_text_" + num;
+            int ir4 = getResources().getIdentifier(str4, "raw", PACKAGE_NAME);
+            arrTmp03333.add(ir4);
+
         }
 
         articleEssayImg.add(arrTmp03);
-
-
-
+        articleEssayTitle.add(arrTmp033);
+        articleEssayTransTitle.add(arrTmp0333);
+        articleEssayTranslated.add(arrTmp03333);
 
 
 
@@ -123,6 +201,23 @@ public class ApplicationManager extends Application {
 
     }
 
+    public int getArticleInterviewTitle(int articleNumber, boolean isTranslated){
+        int retVal;
+
+        if(isTranslated){
+
+            retVal = articleInterviewTransTitle.get(articleNumber);
+
+        }else{
+
+            retVal = articleInterviewTitle.get(articleNumber);
+
+        }
+
+        return retVal;
+
+    }
+
 
     public int getArticleEssay(int category, int num) {
 
@@ -132,6 +227,25 @@ public class ApplicationManager extends Application {
         retVal = arrTmp.get(num);
 
         return retVal;
+
+    }
+
+    public int getArticleEssayTitle(int category, int num, boolean isTranslated){
+        int retVal;
+
+        ArrayList<Integer> arr;
+        if(isTranslated){
+            arr = articleEssayTransTitle.get(category);
+
+        }else{
+            arr = articleEssayTitle.get(category);
+
+        }
+
+        retVal = arr.get(num);
+
+        return retVal;
+
 
     }
 
@@ -148,6 +262,30 @@ public class ApplicationManager extends Application {
     }
 
 
+
+    public int getInterviewTranslatedText(int num){
+
+        int retVal;
+        retVal = articleInterviewTranslated.get(num);
+
+        return retVal;
+
+
+    }
+
+    public int getEssayText(int category, int num){
+
+        int retVal;
+
+        ArrayList<Integer> arrTmp;
+        arrTmp = articleEssayTranslated.get(category);
+
+        retVal = arrTmp.get(num);
+
+        return retVal;
+
+
+    }
 
     /**
      *
@@ -211,6 +349,7 @@ public class ApplicationManager extends Application {
         super.onCreate();
 
         initData();
+        initArticleData();
 
     }
 
