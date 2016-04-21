@@ -59,7 +59,6 @@ public class MediaArticleListActivity extends Activity {
         btn01.setX(155);
         btn01.setY(282);
         btn01.setOnClickListener(ocl);
-        // TODO: set tag as article number
         btn01.setTag(1);
 
 
@@ -71,7 +70,6 @@ public class MediaArticleListActivity extends Activity {
         btn02.setX(155);
         btn02.setY(366);
         btn02.setOnClickListener(ocl);
-        // TODO: set tag as article number
         btn02.setTag(2);
 
         rlMain.addView(btn02);
@@ -83,7 +81,6 @@ public class MediaArticleListActivity extends Activity {
         btn03.setX(155);
         btn03.setY(419);
         btn03.setOnClickListener(ocl);
-        // TODO: set tag as article number
         btn03.setTag(3);
 
         rlMain.addView(btn03);
@@ -94,7 +91,6 @@ public class MediaArticleListActivity extends Activity {
         btn04.setX(155);
         btn04.setY(478);
         btn04.setOnClickListener(ocl);
-        // TODO: set tag as article number
         btn04.setTag(4);
 
         rlMain.addView(btn04);
@@ -106,7 +102,6 @@ public class MediaArticleListActivity extends Activity {
         btn05.setX(155);
         btn05.setY(529);
         btn05.setOnClickListener(ocl);
-        // TODO: set tag as article number
         btn05.setTag(5);
 
         rlMain.addView(btn05);
@@ -118,7 +113,6 @@ public class MediaArticleListActivity extends Activity {
         btn06.setX(155);
         btn06.setY(731);
         btn06.setOnClickListener(ocl);
-        // TODO: set tag as article number
         btn06.setTag(11);
 
         rlMain.addView(btn06);
@@ -130,7 +124,6 @@ public class MediaArticleListActivity extends Activity {
         btn07.setX(155);
         btn07.setY(804);
         btn07.setOnClickListener(ocl);
-        // TODO: set tag as article number;
         btn07.setTag(21);
 
         rlMain.addView(btn07);
@@ -142,7 +135,6 @@ public class MediaArticleListActivity extends Activity {
         btn08.setX(155);
         btn08.setY(864);
         btn08.setOnClickListener(ocl);
-        // TODO: set tag as article number;
         btn08.setTag(31);
 
         rlMain.addView(btn08);

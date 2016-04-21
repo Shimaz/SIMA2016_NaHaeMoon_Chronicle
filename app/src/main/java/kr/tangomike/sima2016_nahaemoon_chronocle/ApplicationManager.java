@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 
 // TODO: Global Timer - reset all activities on time
-// TODO:
+
+
 public class ApplicationManager extends Application {
 
     private BGMManager bgmManager;
@@ -182,6 +183,15 @@ public class ApplicationManager extends Application {
 
     }
 
+
+
+    private void initTimelineData(){
+
+        // TODO: Initialize data for timeline activity
+
+    }
+
+
     /**
      *
      *
@@ -335,11 +345,13 @@ public class ApplicationManager extends Application {
      */
 
     public void setAnimating(boolean val){
+        resetTimer();
         isAnimating = val;
     }
 
 
     public boolean isAnimating(){
+        resetTimer();
         return isAnimating;
     }
 
@@ -350,6 +362,7 @@ public class ApplicationManager extends Application {
 
         initData();
         initArticleData();
+        initTimelineData();
 
     }
 

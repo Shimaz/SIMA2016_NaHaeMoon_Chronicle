@@ -251,7 +251,6 @@ public class ArticleViewActivity extends Activity {
             ivArticleTitle.setImageResource(apm.getArticleInterviewTitle(articleNumber - 1, false));
             ivArticleTransTitle.setImageResource(apm.getArticleInterviewTitle(articleNumber - 1, true));
 
-            // TODO: Load article text
 
             try{
                 InputStream is = getResources().openRawResource(apm.getInterviewTranslatedText(articleNumber - 1));
@@ -320,7 +319,6 @@ public class ArticleViewActivity extends Activity {
 
         scrlArticleTranslated.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
-        // TODO: Add scrollview contents
 
 
 
@@ -371,7 +369,7 @@ public class ArticleViewActivity extends Activity {
 
     private void closeTranslation(){
 
-        // TODO: close top and bottom menu on timer setting
+
 
 
 
@@ -426,6 +424,7 @@ public class ArticleViewActivity extends Activity {
     private void closeMenu(){
         // TODO: close top and bottom menu
 
+        // TODO: close top and bottom menu on timer setting
 
     }
 

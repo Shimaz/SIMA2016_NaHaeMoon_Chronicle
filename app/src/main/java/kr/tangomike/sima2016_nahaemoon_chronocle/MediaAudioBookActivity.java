@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
  */
 public class MediaAudioBookActivity extends Activity {
 
+
+
     private ApplicationManager apm;
 
     private RelativeLayout rlMain;
