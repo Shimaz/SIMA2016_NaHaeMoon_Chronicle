@@ -34,6 +34,7 @@ public class ArticleViewActivity extends Activity {
     private Button btnOpenClose;
     private Button btnBack;
     private ImageView ivNewspaper;
+    private ImageView ivArticleTitle;
 
     private TextView tvPageCount;
 
@@ -63,6 +64,7 @@ public class ArticleViewActivity extends Activity {
         scrlArticleTranslated = (ScrollView)findViewById(R.id.scrl_article_translated);
         tvPageCount = (TextView)findViewById(R.id.tv_article_page_number);
         ivNewspaper = (ImageView)findViewById(R.id.iv_article_zoom);
+        ivArticleTitle = (ImageView)findViewById(R.id.iv_article_view_title);
 
         Intent intent = this.getIntent();
         articleNumber = intent.getIntExtra("article number", 0);
@@ -196,6 +198,7 @@ public class ArticleViewActivity extends Activity {
         if(essayNumber == 0){
             tvPageCount.setText("1/1");
             ivNewspaper.setImageResource(apm.getArticleInterview(articleNumber - 1));
+
 
 
         }else{

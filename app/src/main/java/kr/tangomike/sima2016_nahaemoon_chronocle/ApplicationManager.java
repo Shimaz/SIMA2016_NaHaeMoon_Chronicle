@@ -25,7 +25,11 @@ public class ApplicationManager extends Application {
 
 
     private ArrayList<Integer> articleInterviewImg;
-    private ArrayList<ArrayList> articleEsseyImg;
+    private ArrayList<ArrayList> articleEssayImg;
+    private ArrayList<Integer> articleInterviewTitle;
+    private ArrayList<ArrayList> articleEssayTitle;
+    private ArrayList<Integer> articleInterviewTransTitle;
+    private ArrayList<ArrayList> articleEssayTransTitle;
 
 
     private void initData(){
@@ -38,6 +42,7 @@ public class ApplicationManager extends Application {
 
 
         articleInterviewImg = new ArrayList();
+        articleInterviewTitle = new ArrayList();
 
         for(int i = 0; i < 6; i++){
 
@@ -46,11 +51,15 @@ public class ApplicationManager extends Application {
             int ir = getResources().getIdentifier(str, "drawable", PACKAGE_NAME);
             articleInterviewImg.add(ir);
 
+            //TODO
+            String str2 = "article";
+
+
 
         }
 
 
-        articleEsseyImg = new ArrayList();
+        articleEssayImg = new ArrayList();
 
         ArrayList<Integer> arrTmp01 = new ArrayList();
         for(int i = 0; i < 4; i++){
@@ -62,7 +71,7 @@ public class ApplicationManager extends Application {
 
         }
 
-        articleEsseyImg.add(arrTmp01);
+        articleEssayImg.add(arrTmp01);
 
 
         ArrayList<Integer> arrTmp02 = new ArrayList();
@@ -74,7 +83,7 @@ public class ApplicationManager extends Application {
 
         }
 
-        articleEsseyImg.add(arrTmp02);
+        articleEssayImg.add(arrTmp02);
 
         ArrayList<Integer> arrTmp03 = new ArrayList();
         for(int i = 0; i < 11; i++){
@@ -85,7 +94,9 @@ public class ApplicationManager extends Application {
 
         }
 
-        articleEsseyImg.add(arrTmp03);
+        articleEssayImg.add(arrTmp03);
+
+
 
 
 
@@ -113,11 +124,11 @@ public class ApplicationManager extends Application {
     }
 
 
-    public int getArticleEssay(int category, int num){
+    public int getArticleEssay(int category, int num) {
 
         int retVal;
 
-        ArrayList<Integer> arrTmp = articleEsseyImg.get(category);
+        ArrayList<Integer> arrTmp = articleEssayImg.get(category);
         retVal = arrTmp.get(num);
 
         return retVal;
@@ -128,7 +139,7 @@ public class ApplicationManager extends Application {
         int retVal;
 
         ArrayList<Integer> arr;
-        arr = articleEsseyImg.get(category);
+        arr = articleEssayImg.get(category);
 
         retVal = arr.size();
 
