@@ -56,7 +56,7 @@ public class MediaTopActivity extends Activity {
 
         Button btnAudiobook = new Button(this);
         btnAudiobook.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnAudiobook.setBackgroundResource(R.drawable.mediatop_btn_article);
+        btnAudiobook.setBackgroundResource(R.drawable.mediatop_btn_audiobook);
         btnAudiobook.setX(234);
         btnAudiobook.setY(469);
         btnAudiobook.setOnClickListener(new View.OnClickListener() {

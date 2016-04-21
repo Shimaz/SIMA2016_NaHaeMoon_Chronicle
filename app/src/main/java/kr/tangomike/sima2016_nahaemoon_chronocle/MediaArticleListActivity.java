@@ -119,7 +119,7 @@ public class MediaArticleListActivity extends Activity {
         btn06.setY(731);
         btn06.setOnClickListener(ocl);
         // TODO: set tag as article number
-        btn06.setTag(6);
+        btn06.setTag(11);
 
         rlMain.addView(btn06);
 
@@ -131,7 +131,7 @@ public class MediaArticleListActivity extends Activity {
         btn07.setY(804);
         btn07.setOnClickListener(ocl);
         // TODO: set tag as article number;
-        btn07.setTag(7);
+        btn07.setTag(21);
 
         rlMain.addView(btn07);
 
@@ -143,7 +143,7 @@ public class MediaArticleListActivity extends Activity {
         btn08.setY(864);
         btn08.setOnClickListener(ocl);
         // TODO: set tag as article number;
-        btn08.setTag(8);
+        btn08.setTag(31);
 
         rlMain.addView(btn08);
 

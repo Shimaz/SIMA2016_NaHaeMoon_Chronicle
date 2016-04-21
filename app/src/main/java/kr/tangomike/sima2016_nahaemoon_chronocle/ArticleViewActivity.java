@@ -2,13 +2,17 @@ package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -20,6 +24,7 @@ public class ArticleViewActivity extends Activity {
     private ApplicationManager apm;
 
     private int articleNumber;
+    private int essayNumber;
     private RelativeLayout rlMain;
     private RelativeLayout rlTopTitle;
     private RelativeLayout rlBottomMenu;
@@ -28,6 +33,9 @@ public class ArticleViewActivity extends Activity {
     private Button btnPrev;
     private Button btnOpenClose;
     private Button btnBack;
+    private ImageView ivNewspaper;
+
+    private TextView tvPageCount;
 
     private boolean isTranslationOpen;
     private boolean isMenuOpen;
@@ -42,6 +50,7 @@ public class ArticleViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
+        super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         apm = (ApplicationManager)getApplicationContext();
 
@@ -52,9 +61,18 @@ public class ArticleViewActivity extends Activity {
         rlTopTitle = (RelativeLayout)findViewById(R.id.rl_article_top_title);
         rlBottomMenu = (RelativeLayout)findViewById(R.id.rl_article_bottom_menu);
         scrlArticleTranslated = (ScrollView)findViewById(R.id.scrl_article_translated);
+        tvPageCount = (TextView)findViewById(R.id.tv_article_page_number);
+        ivNewspaper = (ImageView)findViewById(R.id.iv_article_zoom);
 
         Intent intent = this.getIntent();
         articleNumber = intent.getIntExtra("article number", 0);
+        essayNumber = articleNumber/10;
+
+        if(essayNumber != 0) { // if essayNumber is not 1, it's essay.
+
+            articleNumber = articleNumber % 10;
+
+        }
 
         isTranslationOpen = false;
 
@@ -62,6 +80,9 @@ public class ArticleViewActivity extends Activity {
 
         btnBack = new Button(this);
         btnBack.setLayoutParams(lp);
+        btnBack.setBackgroundResource(R.drawable.article_btn_back);
+        btnBack.setX(644);
+        btnBack.setY(0);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +101,7 @@ public class ArticleViewActivity extends Activity {
         });
 
 
+        rlTopTitle.addView(btnBack);
 
         OnClickListener ocl = new OnClickListener() {
             @Override
@@ -89,17 +111,21 @@ public class ArticleViewActivity extends Activity {
                 Intent intent = new Intent(ArticleViewActivity.this, ArticleViewActivity.class);
                 if(v.getTag() == btnKind.BTN_NEXT){
 
-                    int temp = articleNumber++;
-                    intent.putExtra("article number", temp);
+                    articleNumber++;
+
+                    intent.putExtra("article number", articleNumber + (essayNumber * 10));
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
                 }else{
 
-                    int temp = articleNumber--;
-                    intent.putExtra("article number", temp);
+                    articleNumber--;
+                    intent.putExtra("article number", articleNumber + (essayNumber * 10));
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
 
                 }
-                startActivity(intent);
-                overridePendingTransition(R.anim.left_out, R.anim.right_in);
+
                 finish();
 
 
@@ -110,30 +136,37 @@ public class ArticleViewActivity extends Activity {
         btnNext = new Button(this);
         btnNext.setLayoutParams(lp);
         btnNext.setText("Next");
-        btnNext.setX(200);
+        btnNext.setX(600);
         btnNext.setY(50);
         btnNext.setOnClickListener(ocl);
         btnNext.setTag(btnKind.BTN_NEXT);
 
-        rlBottomMenu.addView(btnNext);
+        // attach next button if it's not a single article
+        if(essayNumber != 0 && articleNumber < apm.getArticleEssayCount(essayNumber - 1)){
+            rlBottomMenu.addView(btnNext);
+        }
 
 
         btnPrev = new Button(this);
         btnPrev.setLayoutParams(lp);
         btnPrev.setText("Prev");
-        btnPrev.setX(600);
+        btnPrev.setX(200);
         btnPrev.setY(50);
         btnPrev.setOnClickListener(ocl);
         btnPrev.setTag(btnKind.BTN_PREV);
 
-        rlBottomMenu.addView(btnPrev);
+        // attach previous button if it's not a single article.
+        if(essayNumber != 0 && articleNumber != 1) {
+            rlBottomMenu.addView(btnPrev);
+        }
+
 
 
 
         btnOpenClose = new Button(this);
         btnOpenClose.setLayoutParams(lp);
-        btnOpenClose.setX(900);
-        btnOpenClose.setY(50);
+        btnOpenClose.setX(0);
+        btnOpenClose.setY(0);
         btnOpenClose.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +188,30 @@ public class ArticleViewActivity extends Activity {
         rlBottomMenu.addView(btnOpenClose);
 
 
+        // Settings for Content Data
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/jabml.ttf");
+        tvPageCount.setTextSize(18.0f);
+        tvPageCount.setTypeface(tf);
 
+        if(essayNumber == 0){
+            tvPageCount.setText("1/1");
+            ivNewspaper.setImageResource(apm.getArticleInterview(articleNumber - 1));
+
+
+        }else{
+            String tmp;
+            tmp = String.format("%d/%d", articleNumber, apm.getArticleEssayCount(essayNumber - 1));
+
+            tvPageCount.setText(tmp);
+
+            ivNewspaper.setImageResource(apm.getArticleEssay(essayNumber - 1, articleNumber - 1));
+
+        }
+
+
+        PhotoViewAttacher pva = new PhotoViewAttacher(ivNewspaper);
+
+        pva.update();
 
 
         // TODO: Add scrollview contents
