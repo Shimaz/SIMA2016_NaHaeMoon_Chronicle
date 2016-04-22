@@ -273,7 +273,7 @@ public class ArticleViewActivity extends Activity {
             }
 
 
-            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
+//            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
 
 
         }else{
@@ -307,7 +307,7 @@ public class ArticleViewActivity extends Activity {
             }
 
 
-            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
+//            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
 
         }
 
@@ -325,6 +325,8 @@ public class ArticleViewActivity extends Activity {
     }
 
     private void openTranslation(){
+
+
 
         ObjectAnimator openAni = ObjectAnimator.ofFloat(rlTranslated, "translationY", 1024, 88);
         openAni.setDuration(700);

@@ -25,18 +25,26 @@ public class ApplicationManager extends Application {
     private static int STOP_TIME = 90;
 
 
+    private String PACKAGE_NAME;
+
+    // ArrayLists for ArticleView Data
     private ArrayList<Integer> articleInterviewImg;
     private ArrayList<ArrayList> articleEssayImg;
     private ArrayList<Integer> articleInterviewTitle;
     private ArrayList<ArrayList> articleEssayTitle;
     private ArrayList<Integer> articleInterviewTransTitle;
     private ArrayList<ArrayList> articleEssayTransTitle;
-
-
     private ArrayList<Integer> articleInterviewTranslated;
     private ArrayList<ArrayList> articleEssayTranslated;
 
-    private String PACKAGE_NAME;
+
+
+    // ArrayLists for Timeline and Timeline
+    private ArrayList<Integer> timelinePositions;
+    private ArrayList<DetailPageData> timelineDetails;
+
+
+
 
     private void initData(){
         isAnimating = false;
@@ -189,13 +197,58 @@ public class ApplicationManager extends Application {
 
         // TODO: Initialize data for timeline activity
 
+        timelinePositions = new ArrayList();
+        timelineDetails = new ArrayList();
+
+
+        // Temporary Data
+
+        for(int i = 0; i < 10; i++){
+            timelinePositions.add(i * 1024);
+        }
+
+
+
+        // TODO: load csv file for y position
+
+        // TODO: load csv file for detail page data
+
+
+
     }
 
 
     /**
      *
      *
-     * Data Functions
+     * Timeline Data Functions
+     *
+     *
+     */
+
+
+    public int getTimelinePosition(int num){
+
+        int retVal;
+
+        retVal = timelinePositions.get(num);
+
+        return retVal;
+
+    }
+
+    public int getTimelinePositionCount(){
+
+        return timelinePositions.size();
+
+
+    }
+
+
+    /**
+     *
+     *
+     * Media ArticleView Data Functions
      *
      *
      */
