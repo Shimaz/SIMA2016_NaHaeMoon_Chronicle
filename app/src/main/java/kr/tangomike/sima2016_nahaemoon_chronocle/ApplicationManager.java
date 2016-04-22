@@ -6,6 +6,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +45,7 @@ public class ApplicationManager extends Application {
 
     // ArrayLists for Timeline and Timeline
     private ArrayList<Integer> timelinePositions;
-    private ArrayList<DetailPageData> timelineDetails;
+    private ArrayList<ArrayList> timelineDetails;
 
 
 
@@ -211,7 +215,59 @@ public class ApplicationManager extends Application {
 
         // TODO: load csv file for y position
 
-        // TODO: load csv file for detail page data
+
+
+        // Load timeline detail data from csv file
+        InputStream is = getResources().openRawResource(R.raw.timeline);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        ArrayList<String> tempData = new ArrayList();
+
+        try {
+            while((line = reader.readLine()) != null) {
+                tempData.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        for(int i = 0; i < tempData.size(); i++){
+
+            String oneEvent = tempData.get(i);
+            String[] values = oneEvent.split(",");
+
+            ArrayList<DetailPageData> dpd = new ArrayList();
+
+            for(int j = 0; j < values.length; j++){
+
+                String rawData = values[j];
+                String[] detailpageString = rawData.split("/");
+
+
+                DetailPageData dd;
+
+                if(Integer.parseInt(detailpageString[0]) != 0){
+
+                    dd = new DetailPageData(Integer.parseInt(detailpageString[1]), Integer.parseInt(detailpageString[0]), Integer.parseInt(detailpageString[2]), Integer.parseInt(detailpageString[3]));
+
+
+                }else{
+                    dd = new DetailPageData(0,0,0,0);
+
+                }
+
+                dpd.add(dd);
+
+            }
+
+            timelineDetails.add(dpd);
+
+
+        }
+
 
 
 
@@ -241,6 +297,26 @@ public class ApplicationManager extends Application {
 
         return timelinePositions.size();
 
+
+    }
+
+
+    /**
+     *
+     *
+     * Timeline Detail Fucntions
+     *
+     *
+     */
+
+
+    public ArrayList<DetailPageData> getDetailPageBundle(int yearCount){
+        ArrayList<DetailPageData> retVal;
+
+        retVal = timelineDetails.get(yearCount);
+
+
+        return retVal;
 
     }
 

@@ -34,7 +34,7 @@ public class TimelineActivity extends Activity {
 
     private ArrayList<RelativeLayout> rlTimelineObjects;
 
-    private final static int MOVE_HEIGHT = -500;
+    private final static int MOVE_HEIGHT = 500;
 
 
     @Override
@@ -257,8 +257,9 @@ public class TimelineActivity extends Activity {
 
         RelativeLayout rl = rlTimelineObjects.get(position);
 
-        ObjectAnimator oa = ObjectAnimator.ofFloat(rl, "translationY", -MOVE_HEIGHT);
+        ObjectAnimator oa = ObjectAnimator.ofFloat(rl, "translationY", 0);
         oa.setInterpolator(new AccelerateDecelerateInterpolator());
+        oa.setStartDelay(300);
         oa.setDuration(250);
         oa.addListener(new Animator.AnimatorListener() {
             public void onAnimationStart(Animator animation) {
@@ -283,6 +284,7 @@ public class TimelineActivity extends Activity {
             }
         });
 
+        oa.start();
 
     }
 
