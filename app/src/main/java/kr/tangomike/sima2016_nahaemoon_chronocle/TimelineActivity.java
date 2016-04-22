@@ -253,6 +253,7 @@ public class TimelineActivity extends Activity {
     private void closeTimeline(int position){
 
         // TODO : move timeline components to original position from activityRESULT;
+
         apm.setAnimating(true);
 
         RelativeLayout rl = rlTimelineObjects.get(position);
