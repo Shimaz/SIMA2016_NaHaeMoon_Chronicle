@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,8 @@ public class TimelineDetailActivity extends Activity {
     private Button btnClose;
     private TextView tvPageCount;
 
+
+
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
@@ -57,14 +61,19 @@ public class TimelineDetailActivity extends Activity {
         tvPageCount = (TextView)findViewById(R.id.tv_timeline_detail_page_counter);
 
 
+        tvPageCount.setText("1/" + dpd.size());
 
+        final DetailPagerAdapter adapter = new DetailPagerAdapter(getLayoutInflater(), dpd, yearCount);
 
-
-
+        viewPager.setAdapter(adapter);
         btnNext.setBackgroundResource(R.drawable.timeline_btn_next);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                apm.resetTimer();
+                if(viewPager.getCurrentItem() + 1 != adapter.getCount()){
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                }
 
             }
         });
@@ -74,6 +83,34 @@ public class TimelineDetailActivity extends Activity {
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                apm.resetTimer();
+
+                if(viewPager.getCurrentItem() != 0){
+
+                    viewPager.setCurrentItem((viewPager.getCurrentItem() - 1));
+
+                }else{
+
+                }
+
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                String str = "" + (viewPager.getCurrentItem() + 1) + "/" + (adapter.getCount());
+                tvPageCount.setText(str);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
@@ -107,11 +144,12 @@ public class TimelineDetailActivity extends Activity {
 
         LayoutInflater lf;
         ArrayList<DetailPageData> detailPageData;
+        int year;
 
-
-        public DetailPagerAdapter(LayoutInflater inflater, ArrayList<DetailPageData> dpd){
+        public DetailPagerAdapter(LayoutInflater inflater, ArrayList<DetailPageData> dpd, int year){
             this.lf = inflater;
             this.detailPageData = dpd;
+            this.year = year;
 
         }
 
@@ -119,41 +157,137 @@ public class TimelineDetailActivity extends Activity {
         public int getCount() {
 
 
-            return dpd.size();
+            return detailPageData.size();
 
 
         }
 
 
-//        public Object instantiateItem(View collection, int position) {
-//
-//
-//            ImageView imgview = new ImageView(getBaseContext());
-//
-//
-////            imgview.setImageURI(Uri.parse(tmp+".jpg"));
-//
-//            ((ViewPager)collection).addView(imgview, 0);
-//
-//
-//
-//
-//            return imgview;
-//        }
 
         public Object instantiateItem(ViewGroup container, int position){
 
-            View view = null;
+            View view;
 
             view = lf.inflate(R.layout.child_timeline_detail, null);
 
             RelativeLayout rlChild = (RelativeLayout)view.findViewById(R.id.rl_timeline_detail_child);
             ImageView ivChild = (ImageView)view.findViewById(R.id.iv_timeline_detail_viewpager_child);
 
-            DetailPageData dpd = detailPageData.get(position);
+            DetailPageData dd = detailPageData.get(position);
 
+            String ivStr = "timeline_detail_" + (year + 1) + "_image_" + (position + 1);
+            ivChild.setImageResource(getResources().getIdentifier(ivStr, "drawable", getPackageName()));
+
+
+            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+            Button btnImage;
+            Button btnNews;
+            Button btnPoem;
 
             // TODO : setup detail page components
+            switch (dd.getBtnKind()){
+                case 0: // Image
+                    // Do nothing
+
+                    break;
+
+
+                case 1: // Image Button
+
+                    btnImage = new Button(getApplicationContext());
+
+                    btnImage.setBackgroundResource(R.drawable.timeline_btn_photo);
+                    btnImage.setLayoutParams(lp);
+                    btnImage.setY(dd.getBtnPosition());
+                    btnImage.setX(282);
+                    btnImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+
+
+                    rlChild.addView(btnImage);
+
+                    break;
+
+
+                case 2: // news Button
+                    btnNews = new Button(getApplicationContext());
+                    btnNews.setBackgroundResource(R.drawable.timeline_btn_news);
+                    btnNews.setLayoutParams(lp);
+                    btnNews.setY(dd.getBtnPosition());
+                    btnNews.setX(282);
+                    btnNews.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+
+                    rlChild.addView(btnNews);
+
+                    break;
+
+
+                case 3: // Image + News Button
+                    btnImage = new Button(getApplicationContext());
+                    btnImage.setBackgroundResource(R.drawable.timeline_btn_photo);
+                    btnImage.setLayoutParams(lp);
+                    btnImage.setY(dd.getBtnPosition());
+                    btnImage.setX(131);
+                    btnImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+
+                    });
+
+
+                    rlChild.addView(btnImage);
+
+                    btnNews = new Button(getApplicationContext());
+                    btnNews.setBackgroundResource(R.drawable.timeline_btn_news);
+                    btnNews.setLayoutParams(lp);
+                    btnNews.setY(dd.getBtnPosition());
+                    btnNews.setX(428);
+                    btnNews.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+
+                    rlChild.addView(btnNews);
+
+
+                    break;
+
+
+                case 4: // Poem Button
+
+                    btnPoem = new Button(getApplicationContext());
+                    btnPoem.setBackgroundResource(R.drawable.timeline_btn_poem);
+                    btnPoem.setLayoutParams(lp);
+                    btnPoem.setY(dd.getBtnPosition());
+                    btnPoem.setX(282);
+                    btnPoem.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+                    rlChild.addView(btnPoem);
+
+                    break;
+            }
 
 
 

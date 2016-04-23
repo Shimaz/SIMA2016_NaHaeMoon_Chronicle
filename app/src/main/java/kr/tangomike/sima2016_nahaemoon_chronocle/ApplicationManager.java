@@ -205,16 +205,6 @@ public class ApplicationManager extends Application {
         timelineDetails = new ArrayList();
 
 
-        // Temporary Data
-
-        for(int i = 0; i < 10; i++){
-            timelinePositions.add(i * 1024);
-        }
-
-
-
-        // TODO: load csv file for y position
-
 
 
         // Load timeline detail data from csv file
@@ -269,6 +259,16 @@ public class ApplicationManager extends Application {
         }
 
 
+
+
+
+        // TODO: load csv file for y position
+
+        // Temporary Data
+
+        for(int i = 0; i < timelineDetails.size(); i++){
+            timelinePositions.add(i * 1024);
+        }
 
 
     }
