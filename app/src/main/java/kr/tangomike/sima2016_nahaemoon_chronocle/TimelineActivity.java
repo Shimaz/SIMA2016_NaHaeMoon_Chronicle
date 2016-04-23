@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -304,6 +302,8 @@ public class TimelineActivity extends Activity {
         super.onResume();
         apm.setAnimating(false);
     }
+
+
 
 
 
