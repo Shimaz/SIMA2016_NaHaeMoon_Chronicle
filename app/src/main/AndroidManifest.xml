@@ -75,6 +75,15 @@
             ></activity>
 
 
+        <activity android:name=".TimelineImageViewActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait"
+            ></activity>
+
+        <activity android:name=".TimelinePoemViewActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="reversePortrait"
+            ></activity>
 
     </application>
 

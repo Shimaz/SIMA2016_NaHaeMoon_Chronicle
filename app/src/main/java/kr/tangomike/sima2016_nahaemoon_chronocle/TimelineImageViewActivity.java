@@ -7,7 +7,7 @@ import android.view.WindowManager;
 /**
  * Created by shimaz on 2016-04-16.
  */
-public class TimelineImageViewAcitivty extends Activity {
+public class TimelineImageViewActivity extends Activity {
 
     private ApplicationManager apm;
 
@@ -16,7 +16,16 @@ public class TimelineImageViewAcitivty extends Activity {
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        apm = (ApplicationManager)getApplicationContext();
 
+
+    }
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        apm.setAnimating(false);
     }
 
 }
