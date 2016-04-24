@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 // TODO: Global Timer - reset all activities on time
-
+// TODO: Delay on animation status (false)
 
 public class ApplicationManager extends Application {
 
@@ -476,6 +476,13 @@ public class ApplicationManager extends Application {
     public void setAnimating(boolean val){
         resetTimer();
         isAnimating = val;
+
+        if(val){
+            android.util.Log.i("shimaz", "true");
+        }else{
+            android.util.Log.i("shimaz", "false");
+        }
+
     }
 
 

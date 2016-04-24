@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public class TimelineDetailActivity extends Activity {
 
 
-    // TODO: refer to leeumshop-app view pager adaptor
 
     private ApplicationManager apm;
     private RelativeLayout rlMain;
@@ -173,7 +172,7 @@ public class TimelineDetailActivity extends Activity {
             RelativeLayout rlChild = (RelativeLayout)view.findViewById(R.id.rl_timeline_detail_child);
             ImageView ivChild = (ImageView)view.findViewById(R.id.iv_timeline_detail_viewpager_child);
 
-            DetailPageData dd = detailPageData.get(position);
+            final DetailPageData dd = detailPageData.get(position);
 
             String ivStr = "timeline_detail_" + (year + 1) + "_image_" + (position + 1);
             ivChild.setImageResource(getResources().getIdentifier(ivStr, "drawable", getPackageName()));
@@ -185,7 +184,9 @@ public class TimelineDetailActivity extends Activity {
             Button btnNews;
             Button btnPoem;
 
-            // TODO : setup detail page components
+            final int detailPosition = position;
+
+
             switch (dd.getBtnKind()){
                 case 0: // Image
                     // Do nothing
@@ -205,8 +206,26 @@ public class TimelineDetailActivity extends Activity {
                         @Override
                         public void onClick(View v) {
 
+                            if(!apm.isAnimating()){
+
+                                apm.setAnimating(true);
+
+                                Intent intent = new Intent(TimelineDetailActivity.this, TimelineImageViewActivity.class);
+                                intent.putExtra("year", year);
+                                intent.putExtra("position", detailPosition);
+                                intent.putExtra("count", dd.getImageCount());
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in_short, 0);
+
+                            }
+
+
+
                         }
                     });
+
+
+
 
 
 
@@ -244,6 +263,17 @@ public class TimelineDetailActivity extends Activity {
                         @Override
                         public void onClick(View v) {
 
+                            if(!apm.isAnimating()){
+                                apm.setAnimating(true);
+
+                                Intent intent = new Intent(TimelineDetailActivity.this, TimelineImageViewActivity.class);
+                                intent.putExtra("year", year);
+                                intent.putExtra("position", detailPosition);
+                                intent.putExtra("count", dd.getImageCount());
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in_short, 0);
+                            }
+
                         }
 
                     });
@@ -259,6 +289,22 @@ public class TimelineDetailActivity extends Activity {
                     btnNews.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if(!apm.isAnimating()){
+                                apm.setAnimating(true);
+
+                                Intent intent = new Intent(TimelineDetailActivity.this, TimelineArticleViewActivity.class);
+                                intent.putExtra("year", year);
+                                intent.putExtra("position", detailPosition);
+                                intent.putExtra("count", dd.getNewsCount());
+                                intent.putExtra("article number", 1);
+
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
+
+                            }
+
+
+
 
                         }
                     });
@@ -299,6 +345,12 @@ public class TimelineDetailActivity extends Activity {
         }
 
 
+        @Override
+        public void destroyItem(ViewGroup container, int arg1, Object arg2){
+
+            container.removeView((View)arg2);
+
+        }
 
         @Override
         public void destroyItem(View arg0, int arg1, Object arg2) {

@@ -223,7 +223,7 @@ public class TimelineActivity extends Activity {
                 intent.putExtra("position", pos);
 
                 startActivityForResult(intent, pos);
-                overridePendingTransition(0 ,0);
+                overridePendingTransition(R.anim.fade_in_short ,0);
 
             }
 

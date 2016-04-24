@@ -1,9 +1,12 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by shimaz on 2016-04-22.
  */
-public class DetailPageData {
+public class DetailPageData implements Parcelable {
 
 //    private int timelineNumber;
 //    private int detailNumber;
@@ -34,6 +37,25 @@ public class DetailPageData {
 //        return this.detailNumber;
 //    }
 
+    protected DetailPageData(Parcel in) {
+        btnKind = in.readInt();
+        btnPosition = in.readInt();
+        imageCount = in.readInt();
+        newsCount = in.readInt();
+    }
+
+    public static final Creator<DetailPageData> CREATOR = new Creator<DetailPageData>() {
+        @Override
+        public DetailPageData createFromParcel(Parcel in) {
+            return new DetailPageData(in);
+        }
+
+        @Override
+        public DetailPageData[] newArray(int size) {
+            return new DetailPageData[size];
+        }
+    };
+
     public int getBtnKind(){
         return this.btnKind;
     }
@@ -50,4 +72,16 @@ public class DetailPageData {
         return this.newsCount;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(btnKind);
+        dest.writeInt(btnPosition);
+        dest.writeInt(imageCount);
+        dest.writeInt(newsCount);
+    }
 }
