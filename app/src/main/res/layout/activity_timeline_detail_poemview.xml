@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/article_img_bg">
 
+    <ScrollView
+
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="154dp"
+        android:layout_marginBottom="154dp"
+        android:id="@+id/scrl_poem"
+        >
+
+        <TextView
+            android:id="@+id/tv_poem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:lineSpacingExtra="7sp"
+            android:textColor="#000000"/>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_poem_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="28dp"
+        />
 </RelativeLayout>

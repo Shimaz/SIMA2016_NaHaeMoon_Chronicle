@@ -3,4 +3,25 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/rl_media_video">
 
+
+    <SeekBar
+        android:id="@+id/sb_audio"
+        android:layout_width="529dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="852dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        style="@style/thinBarStyle"/>
+
+    <SeekBar
+        android:id="@+id/sb_volume"
+        android:layout_width="106dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="558dp"
+        android:layout_marginTop="795dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        style="@style/thinBarStyle"/>
+
 </RelativeLayout>

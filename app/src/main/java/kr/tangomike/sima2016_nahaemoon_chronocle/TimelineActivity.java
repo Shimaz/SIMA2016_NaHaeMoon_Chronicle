@@ -5,12 +5,15 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -31,8 +34,9 @@ public class TimelineActivity extends Activity {
     private int lastOpenPosition;
 
     private ArrayList<RelativeLayout> rlTimelineObjects;
+    private ArrayList<Button> btnTimeline;
 
-    private final static int MOVE_HEIGHT = 500;
+    private final static int MOVE_HEIGHT = 797;
 
 
     @Override
@@ -58,6 +62,9 @@ public class TimelineActivity extends Activity {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
+
                 Intent intent = new Intent(TimelineActivity.this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.top_in, R.anim.bottom_out);
@@ -69,6 +76,7 @@ public class TimelineActivity extends Activity {
         rlMainUI.addView(btnHome);
 
 
+        rlMain.setBackgroundResource(R.drawable.timeline_detail_img_open_bg);
 
 
         initTimeline();
@@ -80,9 +88,9 @@ public class TimelineActivity extends Activity {
 
     private void initTimeline(){
 
-        // TODO: add timeline objects to layout
 
         rlTimelineObjects = new ArrayList();
+        btnTimeline = new ArrayList();
 
         lastOpenPosition = 0;
 
@@ -90,6 +98,7 @@ public class TimelineActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
 
@@ -115,8 +124,6 @@ public class TimelineActivity extends Activity {
                         @Override
                         public void onAnimationEnd(Animator animation) {
 
-                            // TODO: delete this when detail activity work has done
-//                            apm.setAnimating(false);
 
                         }
 
@@ -139,51 +146,81 @@ public class TimelineActivity extends Activity {
             }
         };
 
+        // add first layout object
+
+        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        RelativeLayout rlFirst = new RelativeLayout(this);
+        rlFirst.setLayoutParams(lp);
+        ImageView ivFirst = new ImageView(this);
+        ivFirst.setLayoutParams(lp);
+        ivFirst.setImageResource(R.drawable.timeline_1_1);
+        rlFirst.addView(ivFirst);
+        llTimeline.addView(rlFirst);
+
 
 
         for(int i = 0; i < apm.getTimelinePositionCount(); i++){
 
             RelativeLayout rl = new RelativeLayout(this);
 
-            // calculate each layout's height;
-            int rlHeight;
-            if(i == apm.getTimelinePositionCount() - 1) { // last object
+            LinearLayout ll = new LinearLayout(this);
+            ll.setOrientation(LinearLayout.VERTICAL);
+            int tmp = i + 1;
 
-                rlHeight = 1024; // last object's height here
+            String str1 = "timeline_" + tmp + "_2";
+            String str2 = "timeline_" + (tmp + 1) + "_1";
 
-            }else{
-                rlHeight = apm.getTimelinePosition(i + 1) - apm.getTimelinePosition(i);
+            ImageView iv1 = new ImageView(this);
+            iv1.setImageResource(getResources().getIdentifier(str1, "drawable", getPackageName()));
+            iv1.setLayoutParams(lp);
+            ll.addView(iv1);
+
+            if(tmp != apm.getTimelinePositionCount()){
+
+                ImageView iv2 = new ImageView(this);
+                iv2.setImageResource(getResources().getIdentifier(str2, "drawable", getPackageName()));
+                iv2.setLayoutParams(lp);
+                ll.addView(iv2);
 
             }
 
-            rl.setLayoutParams(new LayoutParams(768, rlHeight));
 
-            if(i % 2 == 1){
 
-                rl.setBackgroundColor(Color.RED);
 
-            }else{
-                rl.setBackgroundColor(Color.BLUE);
-            }
+            ll.setLayoutParams(lp);
+            rl.addView(ll);
+
+            rl.setLayoutParams(lp);
+
 
             Button btn = new Button(this);
             btn.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            btn.setText("Open Detail 0" + i);
+            btn.setBackgroundResource(R.drawable.timeline_btn_open);
             btn.setOnClickListener(ocl);
-            btn.setX(300);
-            btn.setY(300);
+            btn.setX(349);
+            btn.setY(14);
             btn.setTag(i);
 
             rl.addView(btn);
+
             rlTimelineObjects.add(rl);
+            btnTimeline.add(btn);
 
             llTimeline.addView(rl);
 
 
 
 
+
         }
 
+        scrlTimeline.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                apm.resetTimer();
+                return false;
+            }
+        });
 
 
     }
@@ -192,13 +229,8 @@ public class TimelineActivity extends Activity {
 
     private void openTimeline(int position) {
 
-        // TODO : move timeline components to open position
-        // TODO : open detail activity when animation ended
 
 
-        // TODO: detail work for open - close animation
-        // TODO: <ScrollView><LinearLayout><RelativeLayout> event objects </RelativeLayout><LinearLayout><ScrollView>
-        // TODO; animate event objects inside relative layout
 
         final int pos = position;
 
@@ -250,7 +282,6 @@ public class TimelineActivity extends Activity {
 
     private void closeTimeline(int position){
 
-        // TODO : move timeline components to original position from activityRESULT;
 
         apm.setAnimating(true);
 

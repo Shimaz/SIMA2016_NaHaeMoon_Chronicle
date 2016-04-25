@@ -91,7 +91,7 @@ public class TimelineArticleViewActivity extends Activity {
         articleNumber = intent.getExtras().getInt("article number", 0);
         year = intent.getExtras().getInt("year", 0);
         position = intent.getExtras().getInt("position", 0);
-        count = intent.getExtras().getInt("year", 0);
+        count = intent.getExtras().getInt("count", 0);
 
         isTranslationOpen = false;
         rlTranslated.setTranslationY(1024);
@@ -107,6 +107,8 @@ public class TimelineArticleViewActivity extends Activity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating() && !isTranslationOpen){
                     apm.setAnimating(true);
@@ -125,6 +127,8 @@ public class TimelineArticleViewActivity extends Activity {
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
 
@@ -204,6 +208,8 @@ public class TimelineArticleViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                apm.resetTimer();
+
                 if(!apm.isAnimating()){
 
 
@@ -256,41 +262,41 @@ public class TimelineArticleViewActivity extends Activity {
 
         // TODO: continue from here
 
-//        String strNewsIR = "timeline_detail_" + (year  + 1) + "_image_" +
+        String strNewsIR = "timeline_detail_" + (year  + 1) + "_image_" + (position + 1) + "_news_" + articleNumber;
 
-//        ivNewspaper.setImageResource(apm.getArticleEssay(essayNumber - 1, articleNumber - 1));
-//        ivArticleTitle.setImageResource(apm.getArticleEssayTitle(essayNumber - 1, articleNumber - 1 , false));
-//        ivArticleTransTitle.setImageResource(apm.getArticleEssayTitle(essayNumber - 1, articleNumber - 1, true));
-//
-//
-//        try{
-//            InputStream is = getResources().openRawResource(apm.getEssayText(essayNumber - 1, articleNumber - 1));
-//            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-//            BufferedReader br = new BufferedReader(isr);
-//
-//            String interviewText;
-//            StringBuilder sb = new StringBuilder("");
-//            while((interviewText = br.readLine()) != null){
-//                sb.append(interviewText);
-//            }
-//
-//            is.close();
-//
-//            tvTranslatedText.setText(sb.toString());
-//
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        ivNewspaper.setImageResource(getResources().getIdentifier(strNewsIR, "drawable", getPackageName()));
+        ivArticleTitle.setImageResource(getResources().getIdentifier(strNewsIR + "_title", "drawable", getPackageName()));
+        ivArticleTransTitle.setImageResource(getResources().getIdentifier(strNewsIR + "_trans_title", "drawable", getPackageName()));
+
+
+        try{
+            InputStream is = getResources().openRawResource(getResources().getIdentifier(strNewsIR + "_trans_text", "raw", getPackageName()));
+            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+
+            String interviewText;
+            StringBuilder sb = new StringBuilder("");
+            while((interviewText = br.readLine()) != null){
+                sb.append(interviewText);
+            }
+
+            is.close();
+
+            tvTranslatedText.setText(sb.toString());
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 //            android.util.Log.i("shimaz", tvTranslatedText.getText().toString());
 
 
 
-//        PhotoViewAttacher pva = new PhotoViewAttacher(ivNewspaper);
-//
-//        pva.update();
+        PhotoViewAttacher pva = new PhotoViewAttacher(ivNewspaper);
+
+        pva.update();
 
 
         scrlArticleTranslated.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);

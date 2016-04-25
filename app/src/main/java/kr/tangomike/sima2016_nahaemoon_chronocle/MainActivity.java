@@ -24,13 +24,13 @@ public class MainActivity extends Activity{
         apm = (ApplicationManager)getApplicationContext();
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_main);
-        rlMain.setBackgroundResource(R.drawable.main_img_bg);
+        rlMain.setBackgroundResource(R.drawable.cover_img_bg);
 
         Button btnTimeline = new Button(this);
         btnTimeline.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnTimeline.setBackgroundResource(R.drawable.main_btn_timeline);
-        btnTimeline.setX(335);
-        btnTimeline.setY(951);
+        btnTimeline.setBackgroundResource(R.drawable.cover_btn_timeline);
+        btnTimeline.setX(309);
+        btnTimeline.setY(949);
         btnTimeline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,9 +55,9 @@ public class MainActivity extends Activity{
 
         Button btnMedia = new Button(this);
         btnMedia.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnMedia.setBackgroundResource(R.drawable.main_btn_media);
-        btnMedia.setX(573);
-        btnMedia.setY(951);
+        btnMedia.setBackgroundResource(R.drawable.cover_btn_media);
+        btnMedia.setX(545);
+        btnMedia.setY(949);
         btnMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +96,14 @@ public class MainActivity extends Activity{
         // all interactions are enabled from here
 
         apm.setAnimating(false);
+        apm.stopTimer();
+    }
+
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        apm.startTimer();
     }
 
 

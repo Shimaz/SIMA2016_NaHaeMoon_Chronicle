@@ -35,6 +35,8 @@ public class MediaArticleListActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                apm.resetTimer();
+
                 if(!apm.isAnimating()){
 
                     apm.setAnimating(true);
@@ -56,10 +58,10 @@ public class MediaArticleListActivity extends Activity {
         Button btn01 = new Button(this);
         btn01.setLayoutParams(lp);
         btn01.setBackgroundResource(R.drawable.media_articlelist_btn_01);
-        btn01.setX(155);
-        btn01.setY(282);
+        btn01.setX(127);
+        btn01.setY(236);
         btn01.setOnClickListener(ocl);
-        btn01.setTag(1);
+        btn01.setTag(11);
 
 
         rlMain.addView(btn01);
@@ -67,10 +69,10 @@ public class MediaArticleListActivity extends Activity {
         Button btn02 = new Button(this);
         btn02.setLayoutParams(lp);
         btn02.setBackgroundResource(R.drawable.media_articlelist_btn_02);
-        btn02.setX(155);
-        btn02.setY(366);
+        btn02.setX(127);
+        btn02.setY(310);
         btn02.setOnClickListener(ocl);
-        btn02.setTag(2);
+        btn02.setTag(21);
 
         rlMain.addView(btn02);
 
@@ -78,20 +80,20 @@ public class MediaArticleListActivity extends Activity {
         Button btn03 = new Button(this);
         btn03.setLayoutParams(lp);
         btn03.setBackgroundResource(R.drawable.media_articlelist_btn_03);
-        btn03.setX(155);
-        btn03.setY(419);
+        btn03.setX(127);
+        btn03.setY(372);
         btn03.setOnClickListener(ocl);
-        btn03.setTag(3);
+        btn03.setTag(31);
 
         rlMain.addView(btn03);
 
         Button btn04 = new Button(this);
         btn04.setLayoutParams(lp);
         btn04.setBackgroundResource(R.drawable.media_articlelist_btn_04);
-        btn04.setX(155);
-        btn04.setY(478);
+        btn04.setX(127);
+        btn04.setY(577);
         btn04.setOnClickListener(ocl);
-        btn04.setTag(4);
+        btn04.setTag(1);
 
         rlMain.addView(btn04);
 
@@ -99,10 +101,10 @@ public class MediaArticleListActivity extends Activity {
         Button btn05 = new Button(this);
         btn05.setLayoutParams(lp);
         btn05.setBackgroundResource(R.drawable.media_articlelist_btn_05);
-        btn05.setX(155);
-        btn05.setY(529);
+        btn05.setX(127);
+        btn05.setY(639);
         btn05.setOnClickListener(ocl);
-        btn05.setTag(5);
+        btn05.setTag(2);
 
         rlMain.addView(btn05);
 
@@ -110,10 +112,10 @@ public class MediaArticleListActivity extends Activity {
         Button btn06 = new Button(this);
         btn06.setLayoutParams(lp);
         btn06.setBackgroundResource(R.drawable.media_articlelist_btn_06);
-        btn06.setX(155);
-        btn06.setY(731);
+        btn06.setX(127);
+        btn06.setY(712);
         btn06.setOnClickListener(ocl);
-        btn06.setTag(11);
+        btn06.setTag(3);
 
         rlMain.addView(btn06);
 
@@ -121,10 +123,10 @@ public class MediaArticleListActivity extends Activity {
         Button btn07 = new Button(this);
         btn07.setLayoutParams(lp);
         btn07.setBackgroundResource(R.drawable.media_articlelist_btn_07);
-        btn07.setX(155);
-        btn07.setY(804);
+        btn07.setX(127);
+        btn07.setY(766);
         btn07.setOnClickListener(ocl);
-        btn07.setTag(21);
+        btn07.setTag(4);
 
         rlMain.addView(btn07);
 
@@ -132,14 +134,23 @@ public class MediaArticleListActivity extends Activity {
         Button btn08 = new Button(this);
         btn08.setLayoutParams(lp);
         btn08.setBackgroundResource(R.drawable.media_articlelist_btn_08);
-        btn08.setX(155);
-        btn08.setY(864);
+        btn08.setX(127);
+        btn08.setY(820);
         btn08.setOnClickListener(ocl);
-        btn08.setTag(31);
+        btn08.setTag(5);
 
         rlMain.addView(btn08);
 
 
+        Button btn09 = new Button(this);
+        btn09.setLayoutParams(lp);
+        btn09.setBackgroundResource(R.drawable.media_articlelist_btn_09);
+        btn09.setX(127);
+        btn09.setY(874);
+        btn09.setOnClickListener(ocl);
+        btn09.setTag(6);
+
+        rlMain.addView(btn09);
 
 
 
@@ -148,6 +159,9 @@ public class MediaArticleListActivity extends Activity {
         btnHome.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
+
                 if(!apm.isAnimating()){
 
                     apm.setAnimating(true);
@@ -164,8 +178,8 @@ public class MediaArticleListActivity extends Activity {
 
         btnHome.setLayoutParams(lp);
         btnHome.setBackgroundResource(R.drawable.media_common_btn_back);
-        btnHome.setX(56);
-        btnHome.setY(948);
+        btnHome.setX(28);
+        btnHome.setY(949);
 
         rlMain.addView(btnHome);
 

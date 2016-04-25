@@ -53,6 +53,8 @@ public class TimelineDetailActivity extends Activity {
         rlMain = (RelativeLayout)findViewById(R.id.rl_timeline_detail);
 
 
+
+
         viewPager = (ViewPager)findViewById(R.id.pager_timeline_detail);
         btnNext = (Button)findViewById(R.id.btn_timeline_detail_next);
         btnPrev = (Button)findViewById(R.id.btn_timeline_detail_prev);
@@ -106,6 +108,7 @@ public class TimelineDetailActivity extends Activity {
                 String str = "" + (viewPager.getCurrentItem() + 1) + "/" + (adapter.getCount());
                 tvPageCount.setText(str);
 
+                apm.resetTimer();
             }
 
             @Override
@@ -206,6 +209,8 @@ public class TimelineDetailActivity extends Activity {
                         @Override
                         public void onClick(View v) {
 
+                            apm.resetTimer();
+
                             if(!apm.isAnimating()){
 
                                 apm.setAnimating(true);
@@ -244,6 +249,22 @@ public class TimelineDetailActivity extends Activity {
                         @Override
                         public void onClick(View v) {
 
+                            apm.resetTimer();
+
+                            if(!apm.isAnimating()){
+                                apm.setAnimating(true);
+
+                                Intent intent = new Intent(TimelineDetailActivity.this, TimelineArticleViewActivity.class);
+                                intent.putExtra("year", year);
+                                intent.putExtra("position", detailPosition);
+                                intent.putExtra("count", dd.getNewsCount());
+                                intent.putExtra("article number", 1);
+
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
+
+                            }
+
                         }
                     });
 
@@ -262,6 +283,8 @@ public class TimelineDetailActivity extends Activity {
                     btnImage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            apm.resetTimer();
 
                             if(!apm.isAnimating()){
                                 apm.setAnimating(true);
@@ -289,6 +312,9 @@ public class TimelineDetailActivity extends Activity {
                     btnNews.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            apm.resetTimer();
+
                             if(!apm.isAnimating()){
                                 apm.setAnimating(true);
 
@@ -326,6 +352,18 @@ public class TimelineDetailActivity extends Activity {
                     btnPoem.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            apm.resetTimer();
+
+                            if(!apm.isAnimating()){
+                                apm.setAnimating(true);
+
+                                Intent intent = new Intent(TimelineDetailActivity.this, TimelinePoemViewActivity.class);
+
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
+
+                            }
 
                         }
                     });

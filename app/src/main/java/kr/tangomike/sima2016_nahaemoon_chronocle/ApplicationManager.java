@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  */
 
 
-// TODO: Global Timer - reset all activities on time
+
 // TODO: Delay on animation status (false)
 
 public class ApplicationManager extends Application {
@@ -28,8 +30,11 @@ public class ApplicationManager extends Application {
     private int tickTime;
     private static int STOP_TIME = 90;
 
+    private Handler mHandler;
 
     private String PACKAGE_NAME;
+
+    private int POSITION_MARGIN = 152;
 
     // ArrayLists for ArticleView Data
     private ArrayList<Integer> articleInterviewImg;
@@ -46,6 +51,8 @@ public class ApplicationManager extends Application {
     // ArrayLists for Timeline and Timeline
     private ArrayList<Integer> timelinePositions;
     private ArrayList<ArrayList> timelineDetails;
+
+
 
 
 
@@ -70,7 +77,7 @@ public class ApplicationManager extends Application {
         articleInterviewTranslated = new ArrayList();
 
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 6; i++){
 
             String num = String.format("%d", i + 1);
             String str = "article_interview_img_news_" + num;
@@ -199,7 +206,7 @@ public class ApplicationManager extends Application {
 
     private void initTimelineData(){
 
-        // TODO: Initialize data for timeline activity
+
 
         timelinePositions = new ArrayList();
         timelineDetails = new ArrayList();
@@ -218,9 +225,12 @@ public class ApplicationManager extends Application {
             while((line = reader.readLine()) != null) {
                 tempData.add(line);
             }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
 
 
@@ -261,14 +271,31 @@ public class ApplicationManager extends Application {
 
 
 
+        // Timeine position data
 
-        // TODO: load csv file for y position
+        InputStream iss = getResources().openRawResource(R.raw.open_position);
 
-        // Temporary Data
+        BufferedReader readerr = new BufferedReader(new InputStreamReader(iss));
+        String linee;
 
-        for(int i = 0; i < timelineDetails.size(); i++){
-            timelinePositions.add(i * 1024);
+
+        try {
+            while((linee = readerr.readLine()) != null) {
+
+                int tmp = Integer.parseInt(linee) - POSITION_MARGIN;
+
+                timelinePositions.add(tmp);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+
+
+
 
 
     }
@@ -436,14 +463,18 @@ public class ApplicationManager extends Application {
 
 
     private void resetApplication(){
-        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+
+        Intent i = getBaseContext().getPackageManager()
+                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
 
     public void resetTimer(){
-        // TODO: resets timer.
         tickTime = 0;
 
 
@@ -451,18 +482,17 @@ public class ApplicationManager extends Application {
 
     public void startTimer(){
         isTicking = true;
+        mHandler.sendEmptyMessage(0);
 
     }
 
     public void stopTimer(){
+        mHandler.removeMessages(0);
         tickTime = 0;
         isTicking = false;
     }
 
-    public boolean isTicking(){
 
-        return isTicking;
-    }
 
 
     /**
@@ -499,6 +529,36 @@ public class ApplicationManager extends Application {
         initData();
         initArticleData();
         initTimelineData();
+
+        mHandler = new Handler() {
+            public void handleMessage(Message msg){
+
+                if(isTicking) tickTime++;
+
+
+                android.util.Log.i("shimaz", ""+tickTime);
+
+
+
+                if(tickTime <= STOP_TIME){
+
+                    mHandler.sendEmptyMessageDelayed(0, 1000);
+
+                }else if(tickTime > STOP_TIME){
+
+                    tickTime = 0;
+                    mHandler.removeMessages(0);
+                    android.util.Log.i("shimaz", "reset application");
+                    resetApplication();
+
+                }
+
+
+            }
+        };
+
+        mHandler.sendEmptyMessage(0);
+
 
     }
 

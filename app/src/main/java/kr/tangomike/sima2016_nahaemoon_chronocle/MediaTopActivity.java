@@ -30,11 +30,13 @@ public class MediaTopActivity extends Activity {
         Button btnNewspaper = new Button(this);
         btnNewspaper.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         btnNewspaper.setBackgroundResource(R.drawable.mediatop_btn_article);
-        btnNewspaper.setX(204);
-        btnNewspaper.setY(252);
+        btnNewspaper.setX(98);
+        btnNewspaper.setY(204);
         btnNewspaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
 
@@ -57,11 +59,13 @@ public class MediaTopActivity extends Activity {
         Button btnAudiobook = new Button(this);
         btnAudiobook.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         btnAudiobook.setBackgroundResource(R.drawable.mediatop_btn_audiobook);
-        btnAudiobook.setX(234);
-        btnAudiobook.setY(469);
+        btnAudiobook.setX(98);
+        btnAudiobook.setY(431);
         btnAudiobook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
                     apm.setAnimating(true);
@@ -84,12 +88,13 @@ public class MediaTopActivity extends Activity {
         Button btnVideo = new Button(this);
         btnVideo.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         btnVideo.setBackgroundResource(R.drawable.mediatop_btn_video);
-        btnVideo.setX(192);
-        btnVideo.setY(706);
+        btnVideo.setX(98);
+        btnVideo.setY(658);
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
 
@@ -116,10 +121,12 @@ public class MediaTopActivity extends Activity {
         btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         btnHome.setBackgroundResource(R.drawable.media_common_btn_back);
         btnHome.setX(56);
-        btnHome.setY(948);
+        btnHome.setY(949);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
                     apm.setAnimating(true);

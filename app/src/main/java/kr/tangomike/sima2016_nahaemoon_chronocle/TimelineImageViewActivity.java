@@ -51,9 +51,15 @@ public class TimelineImageViewActivity extends Activity {
         position = intent.getExtras().getInt("position");
         count = intent.getExtras().getInt("count");
 
+
+        final PhotoViewAdapter adapter = new PhotoViewAdapter(getLayoutInflater(), year, position, count);
+        viewPager = (ViewPager)findViewById(R.id.pager_timeline_detail_photo);
+        viewPager.setAdapter(adapter);
+
         btnClose = (Button)findViewById(R.id.btn_timeline_detail_photo_close);
         btnNext = (Button)findViewById(R.id.btn_timeline_detail_photo_next);
         btnPrev = (Button)findViewById(R.id.btn_timeline_detail_photo_prev);
+
 
 
         btnClose.setBackgroundResource(R.drawable.timeline_btn_photo_close);
@@ -62,8 +68,9 @@ public class TimelineImageViewActivity extends Activity {
             public void onClick(View v) {
 
 
+                overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short);
                 finish();
-                overridePendingTransition(0, R.anim.fade_out_short);
+
 
             }
         });
@@ -75,6 +82,9 @@ public class TimelineImageViewActivity extends Activity {
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(viewPager.getCurrentItem() < count -1){
+                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                    }
 
                 }
             });
@@ -83,28 +93,44 @@ public class TimelineImageViewActivity extends Activity {
             btnPrev.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(viewPager.getCurrentItem() > 0)
 
+                        viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
                 }
             });
+
         }else{
             btnNext.setVisibility(View.GONE);
             btnPrev.setVisibility(View.GONE);
         }
 
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tvPageCount.setText((position + 1) + "/" + count);
+
+                apm.resetTimer();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
         tvPageCount = (TextView)findViewById(R.id.tv_timeline_detail_photo_page_counter);
         tvPageCount.setText("1/" + count);
 
 
-        viewPager = (ViewPager)findViewById(R.id.pager_timeline_detail_photo);
 
-
-        final PhotoViewAdapter adapter = new PhotoViewAdapter(getLayoutInflater(), year, position, count);
-
-
-        viewPager.setAdapter(adapter);
 
     }
 

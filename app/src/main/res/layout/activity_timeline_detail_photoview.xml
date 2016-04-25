@@ -44,7 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="17dp"
+        android:textSize="25sp"
+        android:textColor="#FF866D4B"
         />
 
 </RelativeLayout>

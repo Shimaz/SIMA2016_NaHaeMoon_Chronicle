@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -110,6 +111,8 @@ public class ArticleViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                apm.resetTimer();
+
                 if(!apm.isAnimating() && !isTranslationOpen){
                     apm.setAnimating(true);
                     Intent intent = new Intent(ArticleViewActivity.this, MediaArticleListActivity.class);
@@ -129,6 +132,8 @@ public class ArticleViewActivity extends Activity {
         OnClickListener ocl = new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
 
@@ -201,6 +206,8 @@ public class ArticleViewActivity extends Activity {
         btnOpenClose.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                apm.resetTimer();
 
                 if(!apm.isAnimating()){
 
@@ -317,9 +324,20 @@ public class ArticleViewActivity extends Activity {
         pva.update();
 
 
+
+
         scrlArticleTranslated.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
 
+        scrlArticleTranslated.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                apm.resetTimer();
+
+                return false;
+            }
+        });
 
 
     }
