@@ -11,10 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".ApplicationManager"
-        android:hardwareAccelerated="true">
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
+        >
         <activity android:name=".StartActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:screenOrientation="reversePortrait">
+            android:screenOrientation="reversePortrait"
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

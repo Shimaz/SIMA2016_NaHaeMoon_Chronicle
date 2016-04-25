@@ -34,7 +34,7 @@ public class ApplicationManager extends Application {
 
     private String PACKAGE_NAME;
 
-    private int POSITION_MARGIN = 152;
+    private int POSITION_MARGIN = 0;
 
     // ArrayLists for ArticleView Data
     private ArrayList<Integer> articleInterviewImg;
@@ -467,10 +467,15 @@ public class ApplicationManager extends Application {
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        startActivity(intent);
 
-        Intent i = getBaseContext().getPackageManager()
-                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+//        Intent i = getBaseContext().getPackageManager()
+//                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//        System.exit(0);
+//
+//        startActivity(i);
+
+
     }
 
 
@@ -482,7 +487,7 @@ public class ApplicationManager extends Application {
 
     public void startTimer(){
         isTicking = true;
-        mHandler.sendEmptyMessage(0);
+//        mHandler.sendEmptyMessage(0);
 
     }
 
@@ -493,6 +498,9 @@ public class ApplicationManager extends Application {
     }
 
 
+    public boolean isTicking(){
+        return isTicking;
+    }
 
 
     /**
@@ -557,9 +565,11 @@ public class ApplicationManager extends Application {
             }
         };
 
-        mHandler.sendEmptyMessage(0);
+//        mHandler.sendEmptyMessage(0);
 
 
     }
+
+
 
 }

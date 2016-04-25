@@ -105,7 +105,7 @@ public class StartActivity extends Activity {
 
 
             }
-        }, 5000);
+        }, 1800);
 
 
 

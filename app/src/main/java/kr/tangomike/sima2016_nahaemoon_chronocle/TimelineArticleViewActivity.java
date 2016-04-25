@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -301,6 +302,13 @@ public class TimelineArticleViewActivity extends Activity {
 
         scrlArticleTranslated.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
+        scrlArticleTranslated.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                apm.resetTimer();
+                return false;
+            }
+        });
 
 
 

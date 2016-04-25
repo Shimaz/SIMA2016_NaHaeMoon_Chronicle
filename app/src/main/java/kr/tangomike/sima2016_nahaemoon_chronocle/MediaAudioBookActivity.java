@@ -95,7 +95,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
         Button btnTrack01 = new Button(this);
         btnTrack01.setLayoutParams(lp);
-        btnTrack01.setText("Track 01");
+        btnTrack01.setBackgroundResource(R.drawable.media_audiobook_playlist_1);
         btnTrack01.setX(196);
         btnTrack01.setY(500);
         btnTrack01.setOnClickListener(ocl);
@@ -105,7 +105,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
         Button btnTrack02 = new Button(this);
         btnTrack02.setLayoutParams(lp);
-        btnTrack02.setText("Track 02");
+        btnTrack02.setBackgroundResource(R.drawable.media_audiobook_playlist_2);
         btnTrack02.setX(196);
         btnTrack02.setY(552);
         btnTrack02.setOnClickListener(ocl);
@@ -114,7 +114,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
         rlMain.addView(btnTrack02);
 
         Button btnTrack03 = new Button(this);
-        btnTrack03.setText("Track 03");
+        btnTrack03.setBackgroundResource(R.drawable.media_audiobook_playlist_3);
         btnTrack03.setLayoutParams(lp);
         btnTrack03.setX(196);
         btnTrack03.setY(605);
@@ -124,7 +124,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
         rlMain.addView(btnTrack03);
 
         Button btnTrack04 = new Button(this);
-        btnTrack04.setText("Track 04");
+        btnTrack04.setBackgroundResource(R.drawable.media_audiobook_playlist_4);
         btnTrack04.setLayoutParams(lp);
         btnTrack04.setX(196);
         btnTrack04.setY(658);

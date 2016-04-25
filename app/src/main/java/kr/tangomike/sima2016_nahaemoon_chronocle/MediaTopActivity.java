@@ -120,7 +120,7 @@ public class MediaTopActivity extends Activity {
         Button btnHome = new Button(this);
         btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         btnHome.setBackgroundResource(R.drawable.media_common_btn_back);
-        btnHome.setX(56);
+        btnHome.setX(28);
         btnHome.setY(949);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +154,10 @@ public class MediaTopActivity extends Activity {
         super.onResume();
 
         apm.setAnimating(false);
+        if(!apm.isAnimating()) {
+            apm.startTimer();
+        }
+
 
     }
 

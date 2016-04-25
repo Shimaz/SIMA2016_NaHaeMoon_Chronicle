@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,7 +39,7 @@ public class TimelineActivity extends Activity {
     private ArrayList<RelativeLayout> rlTimelineObjects;
     private ArrayList<Button> btnTimeline;
 
-    private final static int MOVE_HEIGHT = 797;
+    private final static int MOVE_HEIGHT = 763;
 
 
     @Override
@@ -55,10 +58,10 @@ public class TimelineActivity extends Activity {
         scrlTimeline.setSmoothScrollingEnabled(true);
 
         Button btnHome = new Button(this);
+        btnHome.setBackgroundResource(R.drawable.timeline_btn_home);
         btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnHome.setText("Home");
-        btnHome.setX(340);
-        btnHome.setY(10);
+        btnHome.setX(310);
+        btnHome.setY(23);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +114,7 @@ public class TimelineActivity extends Activity {
 
 
                     ObjectAnimator oa = ObjectAnimator.ofInt(scrlTimeline, "scrollY", position);
+                    android.util.Log.i("shimaz",""+ tag + "_" + position);
                     oa.setDuration(500);
                     oa.setInterpolator(new AccelerateDecelerateInterpolator());
                     oa.addListener(new Animator.AnimatorListener() {
@@ -206,6 +210,8 @@ public class TimelineActivity extends Activity {
             rlTimelineObjects.add(rl);
             btnTimeline.add(btn);
 
+
+
             llTimeline.addView(rl);
 
 
@@ -274,6 +280,16 @@ public class TimelineActivity extends Activity {
 
         oa.start();
 
+//        Button btn = btnTimeline.get(position);
+//
+//        Animation ra = new RotateAnimation(0.0f, 135.0f, Animation.RELATIVE_TO_SELF, 50, Animation.RELATIVE_TO_SELF, 50);
+//        ra.setDuration(500);
+//        ra.setInterpolator(new AccelerateDecelerateInterpolator());
+//        ra.setFillAfter(true);
+//
+//        btn.startAnimation(ra);
+
+
 
 
 
@@ -316,6 +332,19 @@ public class TimelineActivity extends Activity {
 
         oa.start();
 
+
+//        Button btn = btnTimeline.get(position);
+//
+//        Animation ra = new RotateAnimation(135.0f, 0.0f, Animation.RELATIVE_TO_SELF, 50, Animation.RELATIVE_TO_SELF, 50);
+//        ra.setStartOffset(300);
+//        ra.setDuration(250);
+//        ra.setInterpolator(new AccelerateDecelerateInterpolator());
+//        ra.setFillAfter(true);
+//
+//        btn.startAnimation(ra);
+
+
+
     }
 
     @Override
@@ -332,6 +361,10 @@ public class TimelineActivity extends Activity {
     protected void onResume(){
         super.onResume();
         apm.setAnimating(false);
+        if(!apm.isTicking()){
+            apm.startTimer();
+        }
+
     }
 
 
