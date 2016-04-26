@@ -105,6 +105,7 @@ public class TimelineImageViewActivity extends Activity {
                 public void onClick(View v) {
                     if(viewPager.getCurrentItem() < count -1){
                         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+//                        apm.clickSound(2);
                     }
 
                 }
@@ -115,8 +116,8 @@ public class TimelineImageViewActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if(viewPager.getCurrentItem() > 0)
-
                         viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+//                        apm.clickSound(2);
                 }
             });
 
@@ -142,6 +143,9 @@ public class TimelineImageViewActivity extends Activity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
+
+                if(state == 2) apm.clickSound(2);
 
             }
         });

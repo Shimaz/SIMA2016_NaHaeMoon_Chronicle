@@ -149,6 +149,7 @@ public class TimelineArticleViewActivity extends Activity {
                 if(!apm.isAnimating()){
 
                     apm.setAnimating(true);
+                    apm.clickSound(1);
 
                     Intent intent = new Intent(TimelineArticleViewActivity.this, TimelineArticleViewActivity.class);
                     if(v.getTag() == btnKind.BTN_NEXT){
@@ -276,7 +277,6 @@ public class TimelineArticleViewActivity extends Activity {
         tvPageCount.setText(tmp);
 
 
-        // TODO: continue from here
 
         String strNewsIR = "timeline_detail_" + (year  + 1) + "_image_" + (position + 1) + "_news_" + articleNumber;
 

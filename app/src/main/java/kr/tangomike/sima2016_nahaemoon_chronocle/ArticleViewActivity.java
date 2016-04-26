@@ -153,6 +153,8 @@ public class ArticleViewActivity extends Activity {
 
                 apm.resetTimer();
 
+                apm.clickSound(1);
+
                 if(!apm.isAnimating()){
 
                     apm.setAnimating(true);
@@ -226,6 +228,8 @@ public class ArticleViewActivity extends Activity {
             public void onClick(View v) {
 
                 apm.resetTimer();
+
+                apm.clickSound(1);
 
                 if(!apm.isAnimating()){
 

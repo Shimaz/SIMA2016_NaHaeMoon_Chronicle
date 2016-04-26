@@ -49,6 +49,8 @@ public class StartActivity extends Activity {
         rlMain.addView(fontTest);
 
 
+//        apm.resetBGM();
+
 
 
 //        Button btnTmp = new Button(this);

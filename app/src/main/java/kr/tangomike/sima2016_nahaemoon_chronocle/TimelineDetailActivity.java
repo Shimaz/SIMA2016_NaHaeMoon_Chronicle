@@ -106,8 +106,6 @@ public class TimelineDetailActivity extends Activity {
 
                     viewPager.setCurrentItem((viewPager.getCurrentItem() - 1));
 
-                }else{
-
                 }
 
             }
@@ -129,6 +127,8 @@ public class TimelineDetailActivity extends Activity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+//                android.util.Log.i("shimaz", "" + state);
+                if(state == 2) apm.clickSound(2);
 
             }
         });

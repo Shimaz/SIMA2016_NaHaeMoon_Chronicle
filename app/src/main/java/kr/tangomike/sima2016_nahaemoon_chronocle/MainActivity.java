@@ -43,12 +43,16 @@ public class MainActivity extends Activity{
                     overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
                     finish();
 
+
+
                 }
 
 
 
             }
         });
+
+
 
         rlMain.addView(btnTimeline);
 
@@ -97,6 +101,7 @@ public class MainActivity extends Activity{
 
         apm.setAnimating(false);
         apm.stopTimer();
+        apm.playBGM();
     }
 
 

@@ -316,6 +316,7 @@ public class MediaVideoActivity extends Activity implements Runnable{
     protected void onResume(){
         super.onResume();
         apm.setAnimating(false);
+        apm.stopBGM();
     }
 
     @Override
@@ -327,6 +328,8 @@ public class MediaVideoActivity extends Activity implements Runnable{
         }
 
         unregisterReceiver(mReceiver);
+
+        apm.playBGM();
 
         super.onDestroy();
 

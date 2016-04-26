@@ -416,6 +416,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
     protected void onResume(){
         super.onResume();
         apm.setAnimating(false);
+        apm.stopBGM();
     }
 
 
@@ -428,6 +429,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
         unregisterReceiver(mReceiver);
 
+        apm.playBGM();
         super.onDestroy();
 
     }

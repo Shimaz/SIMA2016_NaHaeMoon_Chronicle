@@ -61,7 +61,7 @@ public class ApplicationManager extends Application {
         isAnimating = false;
         isTicking = false;
         tickTime = 0;
-        bgmManager = new BGMManager();
+        bgmManager = new BGMManager(this);
 
         PACKAGE_NAME = getPackageName();
 
@@ -465,9 +465,6 @@ public class ApplicationManager extends Application {
     private void resetApplication(){
 
 
-        // TODO: Broadcast some Action Here
-
-
         Intent sendIntent = new Intent("shimaz.close");
         sendBroadcast(sendIntent);
 
@@ -477,10 +474,6 @@ public class ApplicationManager extends Application {
 
         startActivity(i);
 
-
-//        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
 
 
 
@@ -543,6 +536,44 @@ public class ApplicationManager extends Application {
     }
 
 
+    /**
+     *
+     *
+     * Sound Functions
+     *
+     *
+     */
+
+
+    public void playBGM(){
+        bgmManager.playBGM();
+
+    }
+
+    public void stopBGM(){
+        bgmManager.stopBGM();
+    }
+
+    public boolean isPlaying(){
+
+        return bgmManager.playing();
+
+    }
+
+
+    public void clickSound(int soundNumber){
+
+        bgmManager.clickSound(soundNumber);
+
+    }
+
+
+
+
+
+//    public void playBGMfromStart(){
+//        bgmManager.playFromStart();
+//    }
 
     public void onCreate(){
         super.onCreate();
@@ -557,7 +588,7 @@ public class ApplicationManager extends Application {
                 if(isTicking) tickTime++;
 
 
-                android.util.Log.i("shimaz", ""+tickTime);
+//                android.util.Log.i("shimaz", ""+tickTime);
 
 
 
@@ -569,7 +600,7 @@ public class ApplicationManager extends Application {
 
                     tickTime = 0;
                     mHandler.removeMessages(0);
-                    android.util.Log.i("shimaz", "reset application");
+//                    android.util.Log.i("shimaz", "reset application");
                     resetApplication();
 
                 }
@@ -585,4 +616,6 @@ public class ApplicationManager extends Application {
 
 
 
+
 }
+

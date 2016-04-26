@@ -219,7 +219,51 @@ public class TimelineActivity extends Activity {
             btn.setBackgroundResource(R.drawable.timeline_btn_open);
             btn.setOnClickListener(ocl);
             btn.setX(349);
-            btn.setY(14);
+
+            int yPos = 14;
+
+            switch (i){
+
+                case 2:
+                    yPos += 3;
+                    break;
+
+                case 0:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+
+                    yPos += 1;
+                    break;
+
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                    yPos += 2;
+                    break;
+
+
+
+                default:
+                    yPos = 14;
+
+                    break;
+            }
+
+            btn.setY(yPos);
             btn.setTag(i);
 
             rl.addView(btn);
