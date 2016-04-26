@@ -4,7 +4,10 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -64,10 +67,25 @@ public class ArticleViewActivity extends Activity {
     }
 
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
+
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        registerReceiver(mReceiver, mFilter);
 
         apm = (ApplicationManager)getApplicationContext();
 
@@ -242,11 +260,12 @@ public class ArticleViewActivity extends Activity {
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/jabml.ttf");
         tvPageCount.setTextSize(18.0f);
         tvPageCount.setTypeface(tf);
+        tvPageCount.setLineSpacing(0, 1.25f);
 
         rlTranslated.setBackgroundResource(R.drawable.article_img_bg);
-        tvTranslatedText.setTypeface(tf);
         tvTranslatedText.setTextSize(18.0f);
-        tvTranslatedText.setLineSpacing(0, 1.25f);
+        tvTranslatedText.setLineSpacing(25, 1.25f);
+        tvTranslatedText.setTypeface(tf);
         tvTranslatedText.setTextColor(Color.BLACK);
 
 
@@ -454,5 +473,11 @@ public class ArticleViewActivity extends Activity {
         super.onResume();
 
         apm.setAnimating(false);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 }

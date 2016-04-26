@@ -3,7 +3,10 @@ package kr.tangomike.sima2016_nahaemoon_chronocle;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -57,8 +60,18 @@ public class TimelineArticleViewActivity extends Activity {
     private boolean isTranslationOpen;
     private boolean isMenuOpen;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
 
-//    private DetailPageData dpd;
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
 
     private enum btnKind {
         BTN_NEXT,
@@ -72,6 +85,8 @@ public class TimelineArticleViewActivity extends Activity {
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         apm = (ApplicationManager)getApplicationContext();
+
+        registerReceiver(mReceiver, mFilter);
 
 
 
@@ -426,6 +441,13 @@ public class TimelineArticleViewActivity extends Activity {
         super.onResume();
 
         apm.setAnimating(false);
+    }
+
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
 }

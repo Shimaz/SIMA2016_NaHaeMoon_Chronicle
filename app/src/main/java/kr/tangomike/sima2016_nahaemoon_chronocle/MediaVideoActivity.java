@@ -1,8 +1,10 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -38,10 +40,25 @@ public class MediaVideoActivity extends Activity implements Runnable{
 
     private int videoDuration;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
+
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        registerReceiver(mReceiver, mFilter);
 
         apm = (ApplicationManager)getApplicationContext();
         setContentView(R.layout.activity_video);
@@ -308,6 +325,8 @@ public class MediaVideoActivity extends Activity implements Runnable{
             if(vv.isPlaying()) vv.stopPlayback();
             vv = null;
         }
+
+        unregisterReceiver(mReceiver);
 
         super.onDestroy();
 

@@ -1,8 +1,10 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -15,6 +17,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -36,12 +40,31 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
     private AudioManager am;
     private TextView totalTime;
     private TextView nowTime;
+    private int nowTrack;
+
+    private ArrayList<Button> btnTracks;
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
 
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         apm = (ApplicationManager)getApplicationContext();
+
+        registerReceiver(mReceiver, mFilter);
+
         setContentView(R.layout.activity_audiobook);
         rlMain = (RelativeLayout)findViewById(R.id.rl_audio_book);
         rlMain.setBackgroundResource(R.drawable.media_audiobook_img_bg);
@@ -80,6 +103,9 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
         rlMain.addView(btnBack);
 
+
+        nowTrack = 1;
+
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +121,7 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
         Button btnTrack01 = new Button(this);
         btnTrack01.setLayoutParams(lp);
-        btnTrack01.setBackgroundResource(R.drawable.media_audiobook_playlist_1);
+        btnTrack01.setBackgroundResource(R.drawable.media_audiobook_playlist_1_on);
         btnTrack01.setX(196);
         btnTrack01.setY(500);
         btnTrack01.setOnClickListener(ocl);
@@ -133,6 +159,13 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
         rlMain.addView(btnTrack04);
 
+
+        btnTracks = new ArrayList();
+
+        btnTracks.add(btnTrack01);
+        btnTracks.add(btnTrack02);
+        btnTracks.add(btnTrack03);
+        btnTracks.add(btnTrack04);
 
         btnPlayPause = new Button(this);
         btnPlayPause.setBackgroundResource(R.drawable.audiobook_btn_play);
@@ -182,8 +215,8 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
             @Override
             public void onPrepared(MediaPlayer mp) {
 
-                mp.start();
-                btnPlayPause.setBackgroundResource(R.drawable.audiobook_btn_pause);
+//                mp.start();
+//                btnPlayPause.setBackgroundResource(R.drawable.audiobook_btn_pause);
             }
         });
 
@@ -252,18 +285,56 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
 
 
     private void playTrack(int track){
-        if(mp.isPlaying()){
-            mp.stop();
+
+        if(nowTrack != track) {
+
+            nowTrack = track;
+
+            if (mp.isPlaying()) {
+                mp.stop();
+            }
+            sbAudio.setProgress(0);
+
+            mp = null;
+
+            int rid = getResources().getIdentifier("track0" + track, "raw", getPackageName());
+            mp = MediaPlayer.create(getBaseContext(), rid);
+            sbAudio.setMax(mp.getDuration());
+            btnPlayPause.setBackgroundResource(R.drawable.audiobook_btn_play);
+            totalTime.setText(getTimeString(sbAudio.getMax()));
+
+
+
+
+
+            for(int i = 0; i < btnTracks.size(); i++){
+
+                Button btn = btnTracks.get(i);
+
+                int rID;
+
+                String str = "media_audiobook_playlist_" + (i + 1);
+
+                if(nowTrack == i + 1){
+
+                    rID = getResources().getIdentifier(str + "_on", "drawable", getPackageName());
+
+                }else{
+
+                    rID = getResources().getIdentifier(str, "drawable", getPackageName());
+
+                }
+
+                btn.setBackgroundResource(rID);
+
+
+
+            }
+
+
+
+
         }
-        sbAudio.setProgress(0);
-
-        mp = null;
-
-        int rid = getResources().getIdentifier("track0" + track, "raw", getPackageName());
-        mp = MediaPlayer.create(getBaseContext(), rid);
-        sbAudio.setMax(mp.getDuration());
-        btnPlayPause.setBackgroundResource(R.drawable.audiobook_btn_play);
-        totalTime.setText(getTimeString(sbAudio.getMax()));
 
     }
 
@@ -354,6 +425,8 @@ public class MediaAudioBookActivity extends Activity implements Runnable{
             if(mp.isPlaying()) mp.stop();
             mp = null;
         }
+
+        unregisterReceiver(mReceiver);
 
         super.onDestroy();
 

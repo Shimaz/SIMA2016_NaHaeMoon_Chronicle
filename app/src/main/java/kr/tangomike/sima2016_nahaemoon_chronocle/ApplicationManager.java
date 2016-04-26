@@ -463,17 +463,25 @@ public class ApplicationManager extends Application {
 
 
     private void resetApplication(){
+
+
+        // TODO: Broadcast some Action Here
+
+
+        Intent sendIntent = new Intent("shimaz.close");
+        sendBroadcast(sendIntent);
+
+
+        Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity(i);
+
+
 //        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        startActivity(intent);
 
-//        Intent i = getBaseContext().getPackageManager()
-//                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//        System.exit(0);
-//
-//        startActivity(i);
 
 
     }
@@ -486,8 +494,13 @@ public class ApplicationManager extends Application {
     }
 
     public void startTimer(){
-        isTicking = true;
-//        mHandler.sendEmptyMessage(0);
+        if(!isTicking){
+
+            isTicking = true;
+            mHandler.sendEmptyMessage(0);
+
+        }
+
 
     }
 
@@ -565,7 +578,7 @@ public class ApplicationManager extends Application {
             }
         };
 
-//        mHandler.sendEmptyMessage(0);
+        mHandler.sendEmptyMessage(0);
 
 
     }

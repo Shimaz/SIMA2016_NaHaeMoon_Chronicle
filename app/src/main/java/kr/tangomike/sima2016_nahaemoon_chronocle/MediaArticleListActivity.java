@@ -1,7 +1,10 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,10 +22,27 @@ public class MediaArticleListActivity extends Activity {
     private RelativeLayout rlMain;
     private ApplicationManager apm;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
+
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+        registerReceiver(mReceiver, mFilter);
+
         apm = (ApplicationManager)getApplicationContext();
 
         setContentView(R.layout.activity_article_list);
@@ -104,7 +124,7 @@ public class MediaArticleListActivity extends Activity {
         btn05.setX(127);
         btn05.setY(639);
         btn05.setOnClickListener(ocl);
-        btn05.setTag(2);
+        btn05.setTag(3);
 
         rlMain.addView(btn05);
 
@@ -115,7 +135,7 @@ public class MediaArticleListActivity extends Activity {
         btn06.setX(127);
         btn06.setY(712);
         btn06.setOnClickListener(ocl);
-        btn06.setTag(3);
+        btn06.setTag(4);
 
         rlMain.addView(btn06);
 
@@ -126,7 +146,7 @@ public class MediaArticleListActivity extends Activity {
         btn07.setX(127);
         btn07.setY(766);
         btn07.setOnClickListener(ocl);
-        btn07.setTag(4);
+        btn07.setTag(5);
 
         rlMain.addView(btn07);
 
@@ -194,6 +214,12 @@ public class MediaArticleListActivity extends Activity {
     protected void onResume(){
         super.onResume();
         apm.setAnimating(false);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
 }

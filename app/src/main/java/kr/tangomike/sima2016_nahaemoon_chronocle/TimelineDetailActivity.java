@@ -1,7 +1,10 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -37,13 +40,26 @@ public class TimelineDetailActivity extends Activity {
     private Button btnClose;
     private TextView tvPageCount;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
 
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
 
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         apm = (ApplicationManager)getApplicationContext();
+
+        registerReceiver(mReceiver, mFilter);
 
         Intent intent = getIntent();
         yearCount = intent.getExtras().getInt("position");
@@ -139,6 +155,13 @@ public class TimelineDetailActivity extends Activity {
         super.onResume();
         apm.setAnimating(false);
 
+    }
+
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
 

@@ -1,6 +1,10 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -26,11 +30,27 @@ public class TimelinePoemViewActivity extends Activity {
     private TextView tvPoem;
     private Button btnClose;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
+
+
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         apm = (ApplicationManager)getApplicationContext();
+
+        registerReceiver(mReceiver, mFilter);
 
         setContentView(R.layout.activity_timeline_detail_poemview);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/yun330.ttf");
@@ -100,5 +120,11 @@ public class TimelinePoemViewActivity extends Activity {
         apm.setAnimating(false);
     }
 
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+    }
 
 }

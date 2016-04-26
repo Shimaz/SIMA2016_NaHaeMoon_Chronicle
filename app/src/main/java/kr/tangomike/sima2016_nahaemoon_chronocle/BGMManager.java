@@ -1,5 +1,7 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
+import android.media.MediaPlayer;
+
 /**
  * Created by shimaz on 2016-04-15.
  * shimaz.bsh@gmail.com
@@ -7,6 +9,8 @@ package kr.tangomike.sima2016_nahaemoon_chronocle;
 public class BGMManager {
 
     private boolean isPlaying;
+
+    private MediaPlayer mp;
 
     public BGMManager(){
 
@@ -17,6 +21,8 @@ public class BGMManager {
 
 
     private void initBGM(){
+
+
 
     }
 
@@ -36,15 +42,7 @@ public class BGMManager {
 
     }
 
-    public void fadeOut(){
 
-    }
-
-
-
-    public void fadeIn(){
-
-    }
 
 
 

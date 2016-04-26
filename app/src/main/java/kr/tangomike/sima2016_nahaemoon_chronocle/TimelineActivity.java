@@ -3,7 +3,10 @@ package kr.tangomike.sima2016_nahaemoon_chronocle;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -41,11 +44,25 @@ public class TimelineActivity extends Activity {
 
     private final static int MOVE_HEIGHT = 763;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
 
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        registerReceiver(mReceiver, mFilter);
 
         setContentView(R.layout.activity_timeline);
 
@@ -60,8 +77,8 @@ public class TimelineActivity extends Activity {
         Button btnHome = new Button(this);
         btnHome.setBackgroundResource(R.drawable.timeline_btn_home);
         btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        btnHome.setX(310);
-        btnHome.setY(23);
+        btnHome.setX(0);
+        btnHome.setY(60);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -365,6 +382,13 @@ public class TimelineActivity extends Activity {
             apm.startTimer();
         }
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+
+        unregisterReceiver(mReceiver);
     }
 
 

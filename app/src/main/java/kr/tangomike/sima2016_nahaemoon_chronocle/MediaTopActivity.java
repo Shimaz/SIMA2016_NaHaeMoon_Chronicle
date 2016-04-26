@@ -1,7 +1,10 @@
 package kr.tangomike.sima2016_nahaemoon_chronocle;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -17,11 +20,28 @@ public class MediaTopActivity extends Activity {
     private RelativeLayout rlMain;
     private ApplicationManager apm;
 
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+
+            finish();
+
+        }
+    };
+
+
+    private IntentFilter mFilter = new IntentFilter("shimaz.close");
+
+
     @Override
     protected void onCreate(Bundle sis){
         super.onCreate(sis);
         super.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_media_top);
+
+        registerReceiver(mReceiver, mFilter);
+
         apm = (ApplicationManager)getApplicationContext();
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_media_top);
@@ -159,6 +179,12 @@ public class MediaTopActivity extends Activity {
         }
 
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
 }
