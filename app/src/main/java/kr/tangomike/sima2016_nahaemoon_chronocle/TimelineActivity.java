@@ -44,6 +44,8 @@ public class TimelineActivity extends Activity {
 
     private final static int MOVE_HEIGHT = 763;
 
+    private Button btnHome;
+
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -73,15 +75,26 @@ public class TimelineActivity extends Activity {
         llTimeline = (LinearLayout)findViewById(R.id.ll_timeline);
 
         scrlTimeline.setSmoothScrollingEnabled(true);
+        rlMain.setBackgroundResource(R.drawable.timeline_detail_img_open_bg);
 
-        Button btnHome = new Button(this);
+        btnHome = new Button(this);
         btnHome.setBackgroundResource(R.drawable.timeline_btn_home);
         btnHome.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
+//        btnHome.setLayoutParams(new LayoutParams(100, 100));
         btnHome.setX(0);
-        btnHome.setY(60);
+        btnHome.setY(30);
+
+//        btnHome.setBackgroundColor(Color.CYAN);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                for(int i = 0; i <rlTimelineObjects.size(); i++){
+                    RelativeLayout rl = rlTimelineObjects.get(i);
+
+                    android.util.Log.i("nhs height", "" + rl.getMeasuredHeight());
+                }
 
                 apm.resetTimer();
 
@@ -96,7 +109,7 @@ public class TimelineActivity extends Activity {
         rlMainUI.addView(btnHome);
 
 
-        rlMain.setBackgroundResource(R.drawable.timeline_detail_img_open_bg);
+
 
 
         initTimeline();
@@ -179,6 +192,7 @@ public class TimelineActivity extends Activity {
         llTimeline.addView(rlFirst);
 
 
+//        int tmpHeight;
 
         for(int i = 0; i < apm.getTimelinePositionCount(); i++){
 
@@ -273,6 +287,7 @@ public class TimelineActivity extends Activity {
 
 
 
+
             llTimeline.addView(rl);
 
 
@@ -341,16 +356,13 @@ public class TimelineActivity extends Activity {
 
         oa.start();
 
-//        Button btn = btnTimeline.get(position);
-//
-//        Animation ra = new RotateAnimation(0.0f, 135.0f, Animation.RELATIVE_TO_SELF, 50, Animation.RELATIVE_TO_SELF, 50);
-//        ra.setDuration(500);
-//        ra.setInterpolator(new AccelerateDecelerateInterpolator());
-//        ra.setFillAfter(true);
-//
-//        btn.startAnimation(ra);
+        Button btn = btnTimeline.get(position);
+
+        btn.setBackgroundResource(R.drawable.timeline_btn_open_r);
 
 
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out_short);
+        btnHome.startAnimation(fadeOut);
 
 
 
@@ -394,15 +406,11 @@ public class TimelineActivity extends Activity {
         oa.start();
 
 
-//        Button btn = btnTimeline.get(position);
-//
-//        Animation ra = new RotateAnimation(135.0f, 0.0f, Animation.RELATIVE_TO_SELF, 50, Animation.RELATIVE_TO_SELF, 50);
-//        ra.setStartOffset(300);
-//        ra.setDuration(250);
-//        ra.setInterpolator(new AccelerateDecelerateInterpolator());
-//        ra.setFillAfter(true);
-//
-//        btn.startAnimation(ra);
+        Button btn = btnTimeline.get(position);
+        btn.setBackgroundResource(R.drawable.timeline_btn_open);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_short);
+        btnHome.startAnimation(fadeIn);
 
 
 
@@ -425,6 +433,9 @@ public class TimelineActivity extends Activity {
         if(!apm.isTicking()){
             apm.startTimer();
         }
+
+
+
 
     }
 

@@ -114,6 +114,12 @@ public class ArticleViewActivity extends Activity {
 
         }
 
+        if(essayNumber == 4){
+            essayNumber = 3;
+            articleNumber = articleNumber + 10;
+        }
+
+
         isTranslationOpen = false;
         rlTranslated.setTranslationY(1024);
 
@@ -261,7 +267,7 @@ public class ArticleViewActivity extends Activity {
 
 
         // Settings for Content Data
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/jabml.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/nanum.ttf");
         tvPageCount.setTextSize(18.0f);
         tvPageCount.setTypeface(tf);
         tvPageCount.setLineSpacing(0, 1.25f);

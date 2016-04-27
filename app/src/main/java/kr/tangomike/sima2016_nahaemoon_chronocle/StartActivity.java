@@ -31,22 +31,33 @@ public class StartActivity extends Activity {
 
         rlMain = (RelativeLayout)findViewById(R.id.rl_start);
 
-        TextView tv = new TextView(this);
-        tv.setText("Start Splash Screen");
-
-        rlMain.addView(tv);
 
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/jabml.ttf");
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/nanum.ttf");
 
         TextView fontTest = new TextView(this);
-        fontTest.setText("중앙 신문명조 폰트 적용.\n저작권 정보 표시");
+        fontTest.setText("본 저작물에는 한겨레결체를 사용한 콘텐츠가 포함되어있습니다.");
         fontTest.setTextSize(25);
         fontTest.setTypeface(tf);
         fontTest.setX(20);
         fontTest.setY(100);
         fontTest.setLineSpacing(0, 1.25f);
         rlMain.addView(fontTest);
+
+
+        TextView tvSound = new TextView(this);
+        tvSound.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        tvSound.setText("Chris Zabriskie의 Cylinder Six은(는)" + "\n" + "Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/by/4.0/)에" + "\n" + " 따라 라이선스가 부여됩니다.\n" +
+                "출처: http://chriszabriskie.com/cylinders/"+"\n"+"아티스트: http://chriszabriskie.com/");
+        tvSound.setTextSize(15);
+        tvSound.setX(20);
+        tvSound.setY(200);
+        tvSound.setLineSpacing(25, 0.125f);
+        rlMain.addView(tvSound);
+
+
+
 
 
 //        apm.resetBGM();

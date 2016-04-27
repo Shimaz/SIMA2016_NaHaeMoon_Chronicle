@@ -56,6 +56,7 @@ public class TimelinePoemViewActivity extends Activity {
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/yun330.ttf");
         tvPoem = (TextView)findViewById(R.id.tv_poem);
         tvPoem.setTypeface(tf);
+        tvPoem.setLineSpacing(40, 0.125f);
 
 
         btnClose = (Button)findViewById(R.id.btn_poem_close);

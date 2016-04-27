@@ -257,14 +257,14 @@ public class TimelineArticleViewActivity extends Activity {
 
 
         // Settings for Content Data
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/jabml.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/nanum.ttf");
         tvPageCount.setTextSize(18.0f);
         tvPageCount.setTypeface(tf);
 
         rlTranslated.setBackgroundResource(R.drawable.article_img_bg);
         tvTranslatedText.setTypeface(tf);
         tvTranslatedText.setTextSize(18.0f);
-        tvTranslatedText.setLineSpacing(0, 1.25f);
+        tvTranslatedText.setLineSpacing(25, 1.25f);
         tvTranslatedText.setTextColor(Color.BLACK);
 
 

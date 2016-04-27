@@ -122,9 +122,9 @@ public class MediaArticleListActivity extends Activity {
         btn05.setLayoutParams(lp);
         btn05.setBackgroundResource(R.drawable.media_articlelist_btn_05);
         btn05.setX(127);
-        btn05.setY(639);
+        btn05.setY(633);
         btn05.setOnClickListener(ocl);
-        btn05.setTag(3);
+        btn05.setTag(2);
 
         rlMain.addView(btn05);
 
@@ -133,9 +133,9 @@ public class MediaArticleListActivity extends Activity {
         btn06.setLayoutParams(lp);
         btn06.setBackgroundResource(R.drawable.media_articlelist_btn_06);
         btn06.setX(127);
-        btn06.setY(712);
+        btn06.setY(689);
         btn06.setOnClickListener(ocl);
-        btn06.setTag(4);
+        btn06.setTag(3);
 
         rlMain.addView(btn06);
 
@@ -144,9 +144,9 @@ public class MediaArticleListActivity extends Activity {
         btn07.setLayoutParams(lp);
         btn07.setBackgroundResource(R.drawable.media_articlelist_btn_07);
         btn07.setX(127);
-        btn07.setY(766);
+        btn07.setY(745);
         btn07.setOnClickListener(ocl);
-        btn07.setTag(5);
+        btn07.setTag(4);
 
         rlMain.addView(btn07);
 
@@ -155,22 +155,22 @@ public class MediaArticleListActivity extends Activity {
         btn08.setLayoutParams(lp);
         btn08.setBackgroundResource(R.drawable.media_articlelist_btn_08);
         btn08.setX(127);
-        btn08.setY(820);
+        btn08.setY(801);
         btn08.setOnClickListener(ocl);
         btn08.setTag(5);
 
         rlMain.addView(btn08);
 
 
-        Button btn09 = new Button(this);
-        btn09.setLayoutParams(lp);
-        btn09.setBackgroundResource(R.drawable.media_articlelist_btn_09);
-        btn09.setX(127);
-        btn09.setY(874);
-        btn09.setOnClickListener(ocl);
-        btn09.setTag(6);
-
-        rlMain.addView(btn09);
+//        Button btn09 = new Button(this);
+//        btn09.setLayoutParams(lp);
+//        btn09.setBackgroundResource(R.drawable.media_articlelist_btn_09);
+//        btn09.setX(127);
+//        btn09.setY(874);
+//        btn09.setOnClickListener(ocl);
+//        btn09.setTag(6);
+//
+//        rlMain.addView(btn09);
 
 
 

@@ -36,7 +36,7 @@ public class BGMManager {
     private void initBGM(){
 
 
-        bgm = MediaPlayer.create(ctx, R.raw.bgm);
+        bgm = MediaPlayer.create(ctx, R.raw.cylnder_six);
         bgm.setLooping(true);
         click01 = MediaPlayer.create(ctx, R.raw.click_newspaper); // change article
         click02 = MediaPlayer.create(ctx, R.raw.click_viewpager); // swipe
